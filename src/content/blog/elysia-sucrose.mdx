@@ -11,7 +11,7 @@ There is no doubt about that.
 
 In any benchmark, most of the time Elysia somehow outperforms other (JavaScript) frameworks in the same environment.
 
-People joking says it is almost like a black magic.
+People jokingly says it is like a black magic.
 
 But the behind the magic lies some interesting technology.
 
@@ -56,7 +56,7 @@ It is dangerous.
 
 It is easy to shoot yourself in the foot.
 
-But it is not the gun that is dangerous, it is one who is wielding it.
+But it is not the gun itself that could endanger others, it is one who is wielding it.
 
 If it is used properly, it can become a very powerful tool.
 
@@ -149,7 +149,7 @@ function centralFunction(request) {
 }
 ```
 
-However, if the property is `async` user need to await it before using it.
+However, if the property is `async` user need to use `await` it before using it.
 
 ```javascript
 import { Elysia } from 'elysia'
@@ -193,9 +193,11 @@ console.log(say.toString()) // function handler({ body }) { ... }
 
 Did you catch that?
 
-We know that the handler function use a body and now we can programmatically extract it from the function itself what it is going to use.
+We know that the handler function use a body and now we can programmatically extract it from the function. And with `toString()` we can somehow get the code in a `string` form.
 
-This is the key to Sucrose.
+If we could somehow have a parser that could read the parameters that user need...
+
+That is exactly what Sucrose is.
 
 ---
 
@@ -222,7 +224,7 @@ Since we control the DSL, we can just narrow down the spec of JavaScript to a ve
 
 And that is what Sucrose does.
 
-Sucrose tells us what property is going to be used in the handler function.
+Sucrose tells us which property is need for the handler function.
 
 ---
 
