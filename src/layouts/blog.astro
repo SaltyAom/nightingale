@@ -1,0 +1,163 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+
+import dayjs from 'dayjs'
+import './blog.css'
+
+const { title, description, cover, date } = Astro.props
+
+const day = dayjs(date).format('MMMM D, YYYY')
+
+const url = Astro.request.url
+const slug = Astro.params.slug
+---
+
+<html lang="en">
+    <head>
+        <title>{title} - SaltyAom</title>
+        <ViewTransitions />
+
+        <meta name="charset" content="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta name="description" content={description} />
+        <meta name="author" content="SaltyAom">
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐳</text></svg>"
+        />
+
+        <!-- Open Graph -->
+        <link rel="canonical" href="https://saltyaom.com">
+        <meta property="og:title" content={`${title} - SaltyAom`}>
+        <meta property="og:description" content={description}>
+        <meta property='article:author' content="SaltyAom">
+        <meta property='og:site_name' content="SaltyAom">
+        <meta property="og:image" content={`https://saltyaom.com${cover}`}>
+        <meta property="og:image:width" content="1920">
+        <meta property="og:image:height" content="1200">
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content={`${title} - SaltyAom`}>
+        <meta name="twitter:description" content={description}>
+        <meta name="twitter:site" content="@saltyaom">
+        <meta name="twitter:image" content={`https://saltyaom.com${cover}`}>
+        <meta name="twitter:creator" content="@saltyaom">
+
+        <link rel="preload" href={cover} as="image" />
+    </head>
+
+    <body>
+        <main id="blog">
+        	<header class="flex flex-col w-full">
+         		<a href="/blog" class="inline-flex items-center w-16 text-xs text-gray-400 hover:text-blue-500 focus:text-blue-500 mb-2 transition-colors">
+            		<svg
+	              		xmlns="http://www.w3.org/2000/svg"
+	                	width="24"
+	                 	height="24"
+	                  	viewBox="0 0 24 24"
+	                   	fill="none"
+	                    stroke="currentColor"
+	                    stroke-width="2"
+	                    stroke-linecap="round"
+	                    stroke-linejoin="round"
+              			style="transform: scale(.5)"
+	                >
+	                	<line x1="19" y1="12" x2="5" y2="12"/>
+	                 	<polyline points="12 19 5 12 12 5"/>
+	                </svg>
+           			Blog
+              	</a>
+	           	<h1 class="font-serif text-4xl mb-1 leading-snug">
+					{title}
+				</h1>
+      			<p class="text-xs text-gray-600">{day}</p>
+				<img
+					src={cover}
+					alt={title}
+					transition:name={`blog-cover-${slug}`}
+					class="aspect-16-10 w-full object-cover object-center rounded-lg my-4 object-shadow image-scale"
+				/>
+			</header>
+			<article id="blog-content">
+            	<slot />
+            </article>
+            <footer class="flex flex-col w-full">
+           		<section class="flex items-center mt-4">
+   					<a id="blog-share-x" class="blog-utils" href={`https://x.com/share?text=${url}`} target="_blank">
+        				<svg
+            				xmlns="http://www.w3.org/2000/svg"
+                			width="24px"
+                   			height="24px"
+                      		viewBox="0 0 24 24"
+                         	xml:space="preserve"
+ 							stroke="currentColor"
+        					style="transform: scale(.7)"
+                        >
+            				<path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/>
+                		</svg>
+					</a>
+
+					<a id="blog-share-bsky" class="blog-utils" href={`https://bsky.app/intent/compose?text=${url}`} target="_blank">
+						<svg xmlns="http://www.w3.org/2000/svg" width="600" height="24" version="1.1">
+							<path style="transform: scale(.0425)" d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z" fill="currentColor" />
+ 						</svg>
+					</a>
+
+					<button id="blog-share" class="blog-utils" onclick="share()">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							fill="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+  							style="transform: scale(.725)"
+						>
+							<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+							<polyline points="16 6 12 2 8 6"/>
+							<line x1="12" y1="2" x2="12" y2="15"/>
+						</svg>
+					</button>
+           		</section>
+
+				<a href="/blog" class="inline-flex items-center w-16 text-sm text-gray-400 hover:text-blue-500 focus:text-blue-500 mt-4 transition-colors">
+            		<svg
+			        	xmlns="http://www.w3.org/2000/svg"
+			          	width="24"
+			           	height="24"
+		            	viewBox="0 0 24 24"
+		             	fill="none"
+			            stroke="currentColor"
+			            stroke-width="2"
+			            stroke-linecap="round"
+			            stroke-linejoin="round"
+            			style="transform: scale(.625)"
+			        >
+			          	<line x1="19" y1="12" x2="5" y2="12"/>
+			           	<polyline points="12 19 5 12 12 5"/>
+			        </svg>
+           			Blog
+              	</a>
+            </footer>
+        </main>
+    </body>
+</html>
+
+<script is:inline>
+function share() {
+	navigator.share({
+		title: document.title,
+		// @ts-ignore
+		text: document.querySelector('meta[name="description"]')?.content ?? undefined,
+		url: location.href
+	})
+}
+</script>

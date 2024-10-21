@@ -1,5 +1,10 @@
 ---
 import { getCollection } from 'astro:content'
+import { ViewTransitions } from 'astro:transitions'
+
+import dayjs from 'dayjs'
+
+import '../../layouts/blog.css'
 
 const posts = await getCollection('blog')
 ---
@@ -7,22 +12,87 @@ const posts = await getCollection('blog')
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Blog</title>
+	    <title>SaltyAom - Blog</title>
+		<ViewTransitions />
+
+  		<meta name="charset" content="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	    <meta name="description" content="Collection of blog written by SaltyAom" />
+	    <meta name="author" content="SaltyAom">
+	    <link
+	        rel="icon"
+	        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐳</text></svg>"
+	    />
+
+	    <!-- Open Graph -->
+	    <link rel="canonical" href="https://saltyaom.com">
+	    <meta property="og:title" content="SaltyAom Blog">
+	    <meta property="og:description" content="Collection of blog written by SaltyAom">
+	    <meta property='article:author' content="SaltyAom">
+	    <meta property='og:site_name' content="SaltyAom">
+		<meta
+            property="og:image"
+            content="https://saltyaom.com/cosplay/ely-cover.webp"
+        />
+        <meta property="og:image:width" content="2201" />
+        <meta property="og:image:height" content="1467" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" />
+
+	    <!-- Twitter Card -->
+	    <meta name="twitter:card" content="summary_large_image">
+	    <meta name="twitter:title" content="Blog - SaltyAom">
+	    <meta name="twitter:description" content="Collection of blog written by SaltyAom">
+	    <meta name="twitter:site" content="@saltyaom">
+	    <meta name="twitter:image" content="https://saltyaom.com/cosplay/ely-cover.webp">
+	    <meta name="twitter:creator" content="@saltyaom">
     </head>
     <body>
-        <main>
-            <section>
-                <ul>
-                    {
-                        posts.map((post) => (
-                            <li>
-                                <a href={`/blog/${post.slug}/`}>
-                                    <h4 class="title">{post.data.title}</h4>
-                                </a>
-                            </li>
-                        ))
-                    }
-                </ul>
+        <main class="px-4 md:px-0">
+        	<header class="flex flex-col justify-between items-center pt-12">
+				<h1 class="font-serif text-5xl font-medium">SaltyAom</h1>
+				<section class="flex items-center mt-3">
+					<a id="blog-share-x" class="blog-utils" href="https://x.com/saltyaom" target="_blank">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24px"
+				 			height="24px"
+					  		viewBox="0 0 24 24"
+					       	xml:space="preserve"
+							stroke="currentColor"
+							style="transform: scale(.7)"
+					    >
+							<path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/>
+						</svg>
+					</a>
+
+					<a id="blog-share-bsky" class="blog-utils" href="https://bsky.app/profile/saltyaom.com" target="_blank">
+						<svg xmlns="http://www.w3.org/2000/svg" width="600" height="24" version="1.1">
+							<path style="transform: scale(.0425)" d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z" fill="currentColor" />
+						</svg>
+					</a>
+           		</section>
+         	</header>
+            <section class="flex flex-col max-w-lg w-full mx-auto py-8">
+                {
+                    posts.map((post) => (
+                        <a href={`/blog/${post.slug}`}>
+                            <article class="flex flex-col gap-2">
+                            	<img
+                             		class="w-full aspect-16-10 object-cover object-shadow image-scale rounded-lg"
+                             		src={post.data.cover}
+                               		alt={post.data.title}
+                                 	transition:name={`blog-cover-${post.slug}`}
+                                />
+                                <h4 class="text-2xl font-serif mt-2">
+                                	{post.data.title}
+                                </h4>
+                                <p class="text-xs text-gray-600">{dayjs(post.data.date).format('MMMM D, YYYY')}</p>
+                            </article>
+                        </a>
+                    ))
+                }
             </section>
         </main>
     </body>

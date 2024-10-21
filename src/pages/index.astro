@@ -1,4 +1,6 @@
 ---
+import { ViewTransitions } from 'astro:transitions'
+
 import '../styles/global.css'
 ---
 
@@ -6,15 +8,10 @@ import '../styles/global.css'
 <html lang="en">
     <head>
         <title>SaltyAom</title>
+        <ViewTransitions />
+
         <meta name="charset" content="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
 
         <link
             rel="icon"
@@ -40,8 +37,10 @@ import '../styles/global.css'
         />
         <meta property="og:image:width" content="2201" />
         <meta property="og:image:height" content="1467" />
-        <meta property="og:locale" content="th_TH" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
+
+        <link rel="preload" href="/cosplay/ely-cover.webp" as="image" />
     </head>
     <body>
         <main
@@ -121,7 +120,9 @@ import '../styles/global.css'
                     GitHub
                 </a> or <a class="link-blue" href="https://twitter.com/saltyaom" title="I'm active on Twitter/x">
                     Twitter/x
-                </a>.
+                </a> or <a class="link-pink" href="/blog" title="Check out my blog!">
+                    My Blog
+                </a>
             </p>
         </main>
 

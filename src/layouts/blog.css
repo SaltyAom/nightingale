@@ -1,0 +1,68 @@
+html, body {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+}
+
+.object-shadow {
+	@apply transition-shadow;
+    box-shadow: 0 7px 25px rgba(0,0,0,.25);
+}
+
+.object-shadow:hover {
+    box-shadow: 0 15px 45px rgba(0,0,0,.4);
+}
+
+.ease-out-expo {
+	transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-scale {
+	@apply hover:scale-105 transition-transform duration-700 ease-out-expo hover:rounded-lg;
+	transition-property: transform, border-radius, box-shadow;
+}
+
+.image-scale:hover {
+	@apply z-10;
+ 	box-shadow: 0 15px 45px rgba(0,0,0,.4);
+}
+
+#blog {
+	@apply flex flex-col max-w-2xl w-full mx-auto py-8 px-4 md:px-0;
+}
+
+#blog-content {
+	@apply flex flex-col w-full leading-relaxed text-gray-700 gap-3;
+}
+
+#blog-content > h2 {
+	@apply text-3xl font-serif text-black my-2;
+}
+
+#blog-content > hr {
+	@apply my-3;
+}
+
+#blog-content > .astro-code {
+	@apply px-4 py-2 rounded-lg text-sm my-2;
+}
+
+#blog-content > a,
+#blog-content > p > a {
+	@apply text-blue-500 underline;
+}
+
+#blog-content > img {
+	@apply rounded-lg;
+}
+
+.blog-utils {
+	@apply flex justify-center items-center w-7 h-7 text-gray-500 hover:text-blue-500 focus:text-blue-500 transition-colors;
+}
+
+.blog-utils.-small {
+	@apply w-5 h-5;
+}
+
+.blog-utils > svg {
+	@apply transform scale-75;
+}
