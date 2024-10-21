@@ -28,7 +28,7 @@ const slug = Astro.params.slug
         />
 
         <!-- Open Graph -->
-        <link rel="canonical" href="https://saltyaom.com">
+        <link rel="canonical" href={`https://saltyaom.com/blog/${slug}`}>
         <meta property="og:title" content={`${title} - SaltyAom`}>
         <meta property="og:description" content={description}>
         <meta property='article:author' content="SaltyAom">
