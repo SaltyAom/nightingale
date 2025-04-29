@@ -7,22 +7,22 @@ import tailwindcss from '@tailwindcss/vite'
 
 import syntax from './config/syntax-theme.json'
 
-import cloudflare from '@astrojs/cloudflare';
+import cloudflare from '@astrojs/cloudflare'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://saltyaom.com',
-  integrations: [mdx(), sitemap(), react()],
+	site: 'https://saltyaom.com',
+	integrations: [mdx(), sitemap(), react()],
 
-  markdown: {
-      shikiConfig: {
-          theme: syntax
-      }
+	markdown: {
+		shikiConfig: {
+			theme: syntax
+		}
 	},
 
-  vite: {
-      plugins: [tailwindcss()]
+	vite: {
+		plugins: [tailwindcss()]
 	},
 
-  adapter: cloudflare()
+	adapter: cloudflare()
 })
