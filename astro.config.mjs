@@ -7,8 +7,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 import syntax from './config/syntax-theme.json'
 
-import cloudflare from '@astrojs/cloudflare'
-
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://saltyaom.com',
@@ -23,6 +21,4 @@ export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()]
 	},
-
-	adapter: cloudflare()
 })
