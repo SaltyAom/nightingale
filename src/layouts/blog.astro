@@ -6,8 +6,6 @@ import './blog.css'
 
 const { title, description, cover, date } = Astro.props
 
-const day = dayjs(date).format('MMMM D, YYYY')
-
 const url = Astro.request.url
 const slug = Astro.params.slug
 ---
