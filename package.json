@@ -1,31 +1,35 @@
 {
-  "name": "nightingale",
-  "type": "module",
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.0.3",
-    "@astrojs/react": "^4.1.2",
-    "@astrojs/rss": "^4.0.10",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^5.1.4",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
-    "astro": "^5.1.1",
-    "dayjs": "^1.11.13",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.2"
-  },
-  "overrides": {
-    "string-width": "4.2.3"
-  }
+	"name": "nightingale",
+	"type": "module",
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.9.4",
+		"@astrojs/mdx": "^4.2.5",
+		"@astrojs/react": "^4.2.5",
+		"@astrojs/rss": "^4.0.11",
+		"@astrojs/sitemap": "^3.3.1",
+		"@astrojs/tailwind": "^6.0.2",
+		"@tailwindcss/vite": "^4.1.4",
+		"@types/react": "^19.1.2",
+		"@types/react-dom": "^19.1.2",
+		"astro": "^5.7.8",
+		"dayjs": "^1.11.13",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"tailwindcss": "^4.1.4",
+		"typescript": "^5.8.3"
+	},
+	"overrides": {
+		"string-width": "4.2.3"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.1.4"
+	}
 }

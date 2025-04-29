@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 
 import dayjs from 'dayjs'
 import './blog.css'
@@ -15,7 +15,7 @@ const slug = Astro.params.slug
 <html lang="en">
     <head>
         <title>{title} - SaltyAom</title>
-        <ViewTransitions />
+        <ClientRouter />
 
         <meta name="charset" content="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,34 +53,54 @@ const slug = Astro.params.slug
     <body>
         <main id="blog">
         	<header class="flex flex-col w-full">
-         		<a href="/blog" class="inline-flex items-center w-16 text-xs text-gray-400 hover:text-blue-500 focus:text-blue-500 mb-2 transition-colors">
-            		<svg
-	              		xmlns="http://www.w3.org/2000/svg"
-	                	width="24"
-	                 	height="24"
-	                  	viewBox="0 0 24 24"
-	                   	fill="none"
-	                    stroke="currentColor"
-	                    stroke-width="2"
-	                    stroke-linecap="round"
-	                    stroke-linejoin="round"
-              			style="transform: scale(.5)"
-	                >
-	                	<line x1="19" y1="12" x2="5" y2="12"/>
-	                 	<polyline points="12 19 5 12 12 5"/>
-	                </svg>
-           			Blog
-              	</a>
-	           	<h1 class="font-serif text-4xl mb-1 leading-snug">
-					{title}
-				</h1>
-      			<p class="text-xs text-gray-600">{day}</p>
-				<img
-					src={cover}
-					alt={title}
-					transition:name={`blog-cover-${slug}`}
-					class="aspect-16-10 w-full object-cover object-center rounded-lg my-4 object-shadow image-scale"
-				/>
+               <div
+               		class="relative flex flex-col justify-end gap-2 w-full mb-4 aspect-16-10 object-shadow image-scale overflow-hidden rounded-xl"
+                 	transition:name={`blog-container-${slug}`}
+                >
+               		<a
+                 		href="/blog"
+                   		class="z-10 absolute top-0 inline-flex items-center text-xs text-white mt-1.5 ml-1.5 pr-2 rounded-lg hover:bg-white/15 border border-transparent hover:border-white/25 transition-colors"
+                    >
+                		<svg
+		              		xmlns="http://www.w3.org/2000/svg"
+		                	width="24"
+		                 	height="24"
+		                  	viewBox="0 0 24 24"
+		                   	fill="none"
+		                    stroke="currentColor"
+		                    stroke-width="2"
+		                    stroke-linecap="round"
+		                    stroke-linejoin="round"
+                  			style="transform: scale(.5)"
+                     	>
+		                	<line x1="19" y1="12" x2="5" y2="12"/>
+		                 	<polyline points="12 19 5 12 12 5"/>
+			            </svg>
+               			Blog
+                  	</a>
+					<img
+						src={cover}
+						alt={title}
+						transition:name={`blog-cover-${slug}`}
+						class="absolute aspect-16-10 w-full object-cover object-center rounded-xl select-none"
+					/>
+			        <div
+						class="z-10 flex flex-col justify-end min-h-24 text-white p-4 bg-linear-to-t from-black to-transparent"
+					>
+	                    <h4
+							class="text-2xl sm:text-3xl font-serif"
+							transition:name={`blog-title-${slug}`}
+						>
+	                       	{title}
+	                    </h4>
+	                    <p
+							class="text-sm text-white opacity-75 mt-0.5"
+							transition:name={`blog-date-${slug}`}
+						>
+							{dayjs(date).format('MMMM D, YYYY')}
+						</p>
+			        </div>
+               </div>
 			</header>
 			<article id="blog-content">
             	<slot />

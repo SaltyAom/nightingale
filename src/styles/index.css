@@ -1,0 +1,67 @@
+@import 'tailwindcss';
+
+:root {
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html,
+body {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+		sans-serif;
+	overflow-x: hidden;
+}
+
+.object-shadow {
+	transition-property: scale, border-radius box-shadow;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.25);
+}
+
+.object-shadow:hover {
+	box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+.image-scale {
+	@apply hover:scale-105 hover:rounded-lg;
+	transition-property: scale, border-radius box-shadow;
+	transition-duration: 0.7s;
+	transition-timing-function: var(--ease-out-expo);
+}
+
+.image-scale:hover {
+	@apply z-10;
+	box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+@custom-variant hocus (&:hover, &:focus);
+
+@utility link-base {
+	@apply inline-block h-8 px-1.5 transform hover:scale-110 rounded-lg cursor-pointer;
+	transition-property: color, background-color, scale;
+	transition-duration: 0.7s;
+	transition-timing-function: var(--ease-out-expo);
+}
+
+.link-pink {
+	@apply link-base -rotate-2 text-pink-500 bg-pink-500/10 hocus:bg-pink-500/20;
+}
+
+.link-amber {
+	@apply link-base rotate-3 text-amber-500 bg-amber-500/10 hocus:bg-amber-500/20;
+}
+
+.link-emerald {
+	@apply link-base -rotate-1 text-emerald-500 bg-emerald-500/10 hocus:bg-emerald-500/20;
+}
+
+.link-green {
+	@apply link-base -rotate-1 text-green-500 bg-green-500/10 hocus:bg-green-500/20;
+}
+
+.link-violet {
+	@apply link-base -rotate-2 text-violet-500 bg-violet-500/10 hocus:bg-violet-500/20;
+}
+
+.link-blue {
+	@apply link-base rotate-1 text-blue-500 bg-blue-500/10 hocus:bg-blue-500/20;
+}

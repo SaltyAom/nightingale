@@ -1,14 +1,15 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 
-import '../styles/global.css'
+import '../styles/index.css'
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <title>SaltyAom</title>
-        <ViewTransitions />
+
+        <ClientRouter />
 
         <meta name="charset" content="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -76,7 +77,7 @@ import '../styles/global.css'
             </p>
 
             <picture
-                class="block bg-gray-100 my-4 rounded-xl aspect-3-2 overflow-hidden object-shadow image-scale"
+                class="block bg-gray-100 my-4 rounded-xl aspect-3-2 overflow-hidden image-scale object-shadow"
             >
                 <img
                     class="w-full aspect-3-2 object-cover object-center"
@@ -131,13 +132,15 @@ import '../styles/global.css'
             <section class="flex flex-col sm:flex-row-reverse">
                 <div class="flex flex-col sm:w-[36%]">
                     <picture
-                        class="block bg-gray-100 aspect-9-14 overflow-hidden image-scale"
+                        class="block bg-gray-100 overflow-hidden image-scale"
+                        style="aspect-ratio:9/14"
                     >
                         <img
                             loading="lazy"
                             class="w-full object-cover aspect-9-14 object-center"
-                            src="/cosplay/rin-glasses.webp"
-                            alt="SaltyAom's Rin cosplay adjusting glasses with right hand looking at the camera"
+                            src="/cosplay/nagi.webp"
+                            alt="SaltyAom's nagisa cosplay holding hands while looking at the camera"
+                            style="aspect-ratio:9/14"
                         />
                     </picture>
                     <picture class="block bg-gray-100 overflow-hidden image-scale">
@@ -152,24 +155,28 @@ import '../styles/global.css'
 
                 <div class="flex flex-col sm:w-[64%]">
                     <picture
-                        class="block bg-gray-100 aspect-10-16 overflow-hidden image-scale"
+                        class="block bg-gray-100 overflow-hidden image-scale"
+                        style="aspect-ratio:16/10"
                     >
                         <img
                             loading="lazy"
-                            class="w-full aspect-16-10 object-cover object-center"
+                            class="w-full object-cover object-center"
                             src="/cosplay/tingyun-cover.webp"
                             alt="SaltyAom's Tingyun cosplay holding both hands resting on the chest"
+                            style="aspect-ratio:16/10"
                         />
                     </picture>
 
                     <picture
-                        class="block bg-gray-100 aspect-16-10 overflow-hidden image-scale"
+                        class="block bg-gray-100 overflow-hidden image-scale"
+                        style="aspect-ratio:16/10"
                     >
                         <img
                             loading="lazy"
                             class="w-full aspect-16-10 object-cover object-center"
                             src="/cosplay/haruna-pose.webp"
                             alt="SaltyAom's Haruna cosplay smiling at the camera"
+                            style="aspect-ratio:16/10"
                         />
                     </picture>
                 </div>

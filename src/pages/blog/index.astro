@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 
 import dayjs from 'dayjs'
 
@@ -13,7 +13,7 @@ const posts = await getCollection('blog')
 <html lang="en">
     <head>
 	    <title>SaltyAom - Blog</title>
-		<ViewTransitions />
+		<ClientRouter />
 
   		<meta name="charset" content="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -51,7 +51,7 @@ const posts = await getCollection('blog')
     <body>
         <main class="px-4 md:px-0">
         	<header class="flex flex-col justify-between items-center pt-12">
-				<h1 class="font-serif text-5xl font-medium">SaltyAom</h1>
+				<a href="/" class="font-serif text-5xl font-medium">SaltyAom</a>
 				<section class="flex items-center mt-3">
 					<a id="blog-share-x" class="blog-utils" href="https://x.com/saltyaom" target="_blank">
 						<svg
@@ -74,21 +74,30 @@ const posts = await getCollection('blog')
 					</a>
            		</section>
          	</header>
-            <section class="flex flex-col max-w-lg w-full mx-auto py-8">
+            <section class="flex flex-col max-w-lg w-full mx-auto pt-4 pb-18">
                 {
-                    posts.map((post) => (
-                        <a href={`/blog/${post.slug}`}>
-                            <article class="flex flex-col gap-2">
+                    posts.map(({ slug, data: { title, cover, date } }) => (
+                        <a href={`/blog/${slug}`} class="relative w-full">
+                            <article
+                            	class="flex flex-col justify-end gap-2 w-full aspect-16-10 object-shadow image-scale overflow-hidden rounded-xl"
+                            	transition:name={`blog-container-${slug}`}
+                            >
                             	<img
-                             		class="w-full aspect-16-10 object-cover object-shadow image-scale rounded-lg"
-                             		src={post.data.cover}
-                               		alt={post.data.title}
-                                 	transition:name={`blog-cover-${post.slug}`}
+                             		class="absolute w-full aspect-16-10 object-cover rounded-xl"
+                             		src={cover}
+                               		alt={title}
+                                 	transition:name={`blog-cover-${slug}`}
                                 />
-                                <h4 class="text-2xl font-serif mt-2">
-                                	{post.data.title}
-                                </h4>
-                                <p class="text-xs text-gray-600">{dayjs(post.data.date).format('MMMM D, YYYY')}</p>
+                                <div
+                                	class="z-10 flex flex-col justify-end min-h-24 text-white p-4 bg-linear-to-t from-black to-transparent"
+                                >
+	                                <h4 class="text-2xl font-serif" transition:name={`blog-title-${slug}`}>
+	                                	{title}
+	                                </h4>
+	                                <p class="text-xs text-white opacity-75" transition:name={`blog-date-${slug}`}>
+										{dayjs(date).format('MMMM D, YYYY')}
+									</p>
+                                </div>
                             </article>
                         </a>
                     ))
