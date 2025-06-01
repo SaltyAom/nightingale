@@ -36,7 +36,6 @@ html, body {
 
 #blog-content {
 	@apply flex flex-col w-full leading-relaxed text-gray-700 gap-3;
-	font-size: 18px;
 }
 
 #blog-content > h2 {

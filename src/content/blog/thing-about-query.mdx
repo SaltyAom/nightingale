@@ -39,7 +39,7 @@ You get a slightly different result in each language/framework.
 
 This is because there's no RFC or standard on how should we handle query array, and people have different opinions on how to handle it.
 
-So when people try a difference language/framework, they get confused why the parameter they used to doesn't work *correctly*.
+So when people try a difference language/framework, they get confused why the parameter they used to doesn't work _correctly_.
 
 ---
 
@@ -47,7 +47,12 @@ So when people try a difference language/framework, they get confused why the pa
 
 By default, Elysia will only catch the first appearance of the parameter.
 
-<img src="/blog/thing-about-query/elysia.webp" alt="Elysia handling multiple query parameter by log only the first one by default" class="aspect-3/2" loading="lazy" />
+<img
+	src="/blog/thing-about-query/elysia.webp"
+	alt="Elysia handling multiple query parameter by log only the first one by default"
+	class="aspect-3/2"
+	loading="lazy"
+/>
 
 If you want array, you need to explicitly tells Elysia that the specific parameter should be array.
 
@@ -90,28 +95,27 @@ If you want to handle query array, you need to explicitly tells Elysia that the 
 ```ts
 import { Elysia } from 'elysia'
 
-new Elysia()
-	.get('/', ({ query: { name } }) => name, {
-		query: t.Object({
-			name: t.Array(t.String())
-		})
+new Elysia().get('/', ({ query: { name } }) => name, {
+	query: t.Object({
+		name: t.Array(t.String())
 	})
+})
 ```
 
 It's the only logical choice for Elysia as this convention is similiar to what we told our user that want to parse a number or boolean from path parameter, and query parameter for years.
 
 ```ts
-new Elysia()
-	.get('/', ({ query: { age } }) => age, {
-		query: t.Object({
-			age: t.Number()
-		})
+new Elysia().get('/', ({ query: { age } }) => age, {
+	query: t.Object({
+		age: t.Number()
 	})
+})
 ```
 
 This is the same as how we handle path parameter, query parameter, and body parameter.
 
 ---
+
 ## Why first not last?
 
 Following API convention from the giant like Node.js and .Net Core sounds like a good idea but I beg to differ.
