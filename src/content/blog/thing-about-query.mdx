@@ -1,0 +1,143 @@
+---
+title: Thing about URL Query that people don't talk about
+description: How to parse URL query array, and why we choose the first appearance only instead of array.
+cover: /blog/thing-about-query/tingyun.webp
+date: 2025-06-01
+---
+
+There is this one API design thing that people don't talk about but I think is important.
+
+## How to parse URL query array
+
+Ok let's say you have a URL like this:
+
+```
+https://example.com/api?name=a&name=b
+```
+
+What should the results be?
+
+If you try the follows in each language/framework, you will get different results:
+
+| Parameter Format    | Node.js      | .Net Core        | PHP               |
+| ------------------- | ------------ | ---------------- | ----------------- |
+| `name=a&name=b`     | `name='b'`   | `name='b'`       | `name='b'`        |
+| `name[]=a&name[]=b` | `name[]='b'` | `name[]='b`      | `name=['a', 'b']` |
+| `name=a,b`          | `name='a,b'` | `name=['a','b']` | `name='a,b'`      |
+
+<small>
+	**Note**: The above table is an example but I didn't recheck, the actual
+	result may vary depending on the version of the language/framework but the
+	general idea is the same.
+</small>
+
+You get a slightly different result in each language/framework.
+
+-   Node.js: If parameter appears multiple time, catch only the last one (no array)
+-   .Net Core: If parameter is concat with comma, then parse it as array
+-   PHP, Express, Rails: Append square bracket to parameter name to handle it as array
+
+This is because there's no RFC or standard on how should we handle query array, and people have different opinions on how to handle it.
+
+So when people try a difference language/framework, they get confused why the parameter they used to doesn't work *correctly*.
+
+---
+
+## Elysia use the first appearance only
+
+By default, Elysia will only catch the first appearance of the parameter.
+
+<img src="/blog/thing-about-query/elysia.webp" alt="Elysia handling multiple query parameter by log only the first one by default" class="aspect-3/2" loading="lazy" />
+
+If you want array, you need to explicitly tells Elysia that the specific parameter should be array.
+
+We have tried catching multiple parameter and cast it as array by default but we decided to revert back because.
+
+> It's redundant, annoying, and not convenient to handle the difference between `string`, and `string[]` **every single time**.
+
+Even if you force someone to add a boilerplate to safe guard when people need to do something, they will find a way to not do it or **cheat**.
+
+In our case, people will just cheat by unsafely cast `string | string[]` to `string` and call it a day. Not wanting to deal with the hassle of checking if it's an array or not for a thousand times.
+
+But then, anything that could go wrong will go wrong.
+
+Random people send `name=a&name=b`, and break the system defeating the purpose of having an array in the first place.
+
+---
+
+## People don't like to admit that they are wrong
+
+Hypothetically speaking.
+
+Once the system is broken, they will complain that the language/framework they're using is bad because it doesn't do what they expected while they are the one who doesn't follow the rules, and cheat in the first place.
+
+If that's the case then I personally think that is from a bad API design decision that allows people to cheat in the first place.
+
+The one who make that design decision is responsible for the action because there is a flaw in API design that will make people cheat in the first place.
+
+I think there's something in Game Design that can be applied to API Design, which is that
+
+## API design is not just about technical implementation, but also understanding how people will use it.
+
+Preventing people from cheating without them knowing is what I think a good API design should have. That's why we don't allow people to cheat in Elysia.
+
+---
+
+## Explicitly say it
+
+If you want to handle query array, you need to explicitly tells Elysia that the specific parameter should be array.
+
+```ts
+import { Elysia } from 'elysia'
+
+new Elysia()
+	.get('/', ({ query: { name } }) => name, {
+		query: t.Object({
+			name: t.Array(t.String())
+		})
+	})
+```
+
+It's the only logical choice for Elysia as this convention is similiar to what we told our user that want to parse a number or boolean from path parameter, and query parameter for years.
+
+```ts
+new Elysia()
+	.get('/', ({ query: { age } }) => age, {
+		query: t.Object({
+			age: t.Number()
+		})
+	})
+```
+
+This is the same as how we handle path parameter, query parameter, and body parameter.
+
+---
+## Why first not last?
+
+Following API convention from the giant like Node.js and .Net Core sounds like a good idea but I beg to differ.
+
+There's something called [HTTP Parameter Pollution](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/04-Testing_for_HTTP_Parameter_Pollution) where an attacker can send multiple parameters with the same name to try to exploit the system.
+
+Suppose you have an API endpoint for a marketplace that accept a coupon code via query parameter like:
+
+```
+https://api.example.com/buy?refer=saltyaom
+```
+
+Then the attacker can exploit the system by append another query parameter after the valid one like this:
+
+```
+https://api.example.com/buy?refer=saltyaom&refer=evil
+```
+
+So instead of using the first one, the API will use the last one instead.
+
+This can be used to exploit the system by sending a valid coupon code and an invalid one, hoping that the API will use the invalid one instead of the valid one.
+
+Many of the exploits could be done by appending something after the end of the fixed text.
+
+So I just decided to use the first one instead.
+
+And a bit of a performance reason as duplicated key can be skipped, and look ahead saving a few iteration.
+
+However, I don't think there's no right answer for either choosing the first or the last one. I just think that using the first one is more logical for our case.

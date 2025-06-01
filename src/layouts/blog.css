@@ -31,23 +31,28 @@ html, body {
 }
 
 #blog {
-	@apply flex flex-col max-w-2xl w-full mx-auto py-4 md:py-8 px-4 md:px-0 transition-all;
+	@apply flex flex-col max-w-3xl w-full mx-auto py-4 md:py-8 px-4 md:px-0 transition-all;
 }
 
 #blog-content {
 	@apply flex flex-col w-full leading-relaxed text-gray-700 gap-3;
+	font-size: 18px;
 }
 
 #blog-content > h2 {
-	@apply text-3xl font-serif text-black my-2;
+	@apply text-3xl font-serif text-black my-2 leading-relaxed;
+}
+
+#blog-content > p {
+	@apply leading-relaxed;
 }
 
 #blog-content > hr {
-	@apply my-3 text-slate-300;
+	@apply mt-3 mb-1 text-slate-300;
 }
 
 #blog-content > .astro-code {
-	@apply px-4 py-2 rounded-lg text-sm my-2;
+	@apply p-4 rounded-xl my-2;
 }
 
 #blog-content > a,
@@ -55,8 +60,47 @@ html, body {
 	@apply text-blue-500 underline;
 }
 
-#blog-content > img {
-	@apply rounded-lg;
+#blog-content > img,
+#blog-content > p > img {
+	@apply object-center object-cover rounded-xl overflow-hidden bg-slate-50 dark:bg-slate-800 hover:scale-105 hover:rounded-xl;
+	transition-duration: .4s;
+	transition-property: scale, border-radius, box-shadow;
+	transition-timing-function: var(--ease-out-expo);
+}
+
+#blog-content > p > img:hover {
+    box-shadow: 0 7px 25px rgba(0,0,0,.25);
+}
+
+
+#blog-content > ul {
+	@apply list-['-'] pl-2;
+}
+
+#blog-content > ul > li {
+	@apply pl-2 py-0.25;
+}
+
+#blog-content > small {
+	@apply mb-4 opacity-50;
+}
+
+#blog-content > table {
+	@apply w-full my-4;
+}
+
+#blog-content > table > thead {}
+
+#blog-content > table > thead > tr > th {
+	@apply p-2 text-left;
+}
+
+#blog-content > table > tbody > tr {
+	@apply border-t border-slate-200 dark:border-slate-600;
+}
+
+#blog-content > table > tbody > tr > td {
+	@apply p-2;
 }
 
 .blog-utils {

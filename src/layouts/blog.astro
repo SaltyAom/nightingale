@@ -13,9 +13,10 @@ const slug = Astro.params.slug
 <html lang="en">
     <head>
         <title>{title} - SaltyAom</title>
+
         <ClientRouter />
 
-        <meta name="charset" content="utf-8" />
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <meta name="description" content={description} />
@@ -82,8 +83,12 @@ const slug = Astro.params.slug
 						transition:name={`blog-cover-${slug}`}
 						class="absolute aspect-16-10 w-full object-cover object-center rounded-xl select-none"
 					/>
+				    <div
+				     	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black to-transparent rounded-xl"
+				     	transition:name={`blog-overlay-${slug}`}
+				    />
 			        <div
-						class="z-10 flex flex-col justify-end min-h-24 text-white p-4 bg-linear-to-t from-black to-transparent"
+						class="z-10 flex flex-col justify-end min-h-24 text-white p-4"
 					>
 	                    <h4
 							class="text-2xl sm:text-3xl font-serif"
@@ -113,7 +118,7 @@ const slug = Astro.params.slug
                       		viewBox="0 0 24 24"
                          	xml:space="preserve"
  							stroke="currentColor"
-        					style="transform: scale(.7)"
+        					style="transform: scale(.8)"
                         >
             				<path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/>
                 		</svg>
@@ -125,7 +130,7 @@ const slug = Astro.params.slug
  						</svg>
 					</a>
 
-					<button id="blog-share" class="blog-utils" onclick="share()">
+					<button id="blog-share" class="blog-utils" onclick="share()" class="cursor-pointer">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -137,7 +142,8 @@ const slug = Astro.params.slug
 							stroke-width="2"
 							stroke-linecap="round"
 							stroke-linejoin="round"
-  							style="transform: scale(.725)"
+  							style="transform: scale(.95) translateY(-1px) translateX(-1px)"
+         					class="cursor-pointer"
 						>
 							<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
 							<polyline points="16 6 12 2 8 6"/>
@@ -164,6 +170,14 @@ const slug = Astro.params.slug
 			        </svg>
            			Blog
               	</a>
+
+               <p class="w-full mt-6 text-gray-400 text-sm font-serif">
+                   For all that is beautiful in the world
+               </p>
+
+               <p class="w-full mt-2 mb-8 text-gray-400 text-sm font-serif">
+                   &copy; SaltyAom
+               </p>
             </footer>
         </main>
     </body>

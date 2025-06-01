@@ -11,25 +11,25 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/mdx": "^4.2.5",
-		"@astrojs/react": "^4.2.5",
+		"@astrojs/mdx": "^4.3.0",
+		"@astrojs/react": "^4.3.0",
 		"@astrojs/rss": "^4.0.11",
-		"@astrojs/sitemap": "^3.3.1",
-		"@tailwindcss/vite": "^4.1.4",
-		"@types/react": "^19.1.2",
-		"@types/react-dom": "^19.1.2",
-		"astro": "^5.7.8",
+		"@astrojs/sitemap": "^3.4.0",
+		"@tailwindcss/vite": "^4.1.8",
+		"@types/react": "^19.1.6",
+		"@types/react-dom": "^19.1.5",
+		"astro": "^5.8.1",
 		"dayjs": "^1.11.13",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
-		"tailwindcss": "^4.1.4",
+		"tailwindcss": "^4.1.8",
 		"typescript": "^5.8.3"
 	},
 	"overrides": {
 		"string-width": "4.2.3"
 	},
 	"devDependencies": {
-		"@tailwindcss/postcss": "^4.1.4"
+		"@tailwindcss/postcss": "^4.1.8"
 	},
 	"trustedDependencies": [
 		"astro"
