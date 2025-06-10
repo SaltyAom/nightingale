@@ -68,7 +68,8 @@ body {
 }
 
 .social-link {
-	@apply flex justify-center items-center w-7 h-7 text-white;
+	@apply flex justify-center items-center w-7 h-7 text-white hocus:scale-125 transition-transform cursor-pointer duration-700;
+	transition-timing-function: var(--ease-out-expo);
 }
 
 .peko-opacity {
