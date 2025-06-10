@@ -29,7 +29,8 @@
 		"string-width": "4.2.3"
 	},
 	"devDependencies": {
-		"@tailwindcss/postcss": "^4.1.8"
+		"@tailwindcss/postcss": "^4.1.8",
+		"prettier": "^3.5.3"
 	},
 	"trustedDependencies": [
 		"astro"

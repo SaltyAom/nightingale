@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant hocus (&:hover, &:focus);
+
 :root {
 	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -9,7 +11,6 @@ body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
 		Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
 		sans-serif;
-	overflow-x: hidden;
 }
 
 .object-shadow {
@@ -64,4 +65,16 @@ body {
 
 .link-blue {
 	@apply link-base rotate-1 text-blue-500 bg-blue-500/10 hocus:bg-blue-500/20;
+}
+
+.social-link {
+	@apply flex justify-center items-center w-7 h-7 text-white;
+}
+
+.peko-opacity {
+	opacity: 0;
+}
+
+.aspect-16-10 {
+	aspect-ratio: 16 / 10;
 }

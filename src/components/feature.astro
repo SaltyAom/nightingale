@@ -1,0 +1,16 @@
+---
+const { title, content, icon, footer, href } = Astro.props
+---
+
+<a
+	class="flex flex-col aspect-square p-3 rounded-2xl border border-white/25 backdrop-blur-2xl peko-opacity hocus:border-white/50 hocus:scale-105 outline-none" style="transition-property: border-color, scale; transition-duration: 0.6s; transition-timing-function: var(--ease-out-expo);"
+	href={href}
+	target="_blank"
+>
+	<div class="flex justify-center items-center w-10 h-10 rounded-4xl bg-white/20 border border-white/25 mb-2.5">
+		<img src={icon} alt={title} class="w-7.5 h-7.5 rounded-4xl" />
+	</div>
+	<h3 class="text-3xl font-serif font-medium">{title}</h3>
+	<p class="font-light mt-1.5 mb-auto">{content}</p>
+	<p class="text-xs font-light opacity-80">{footer}</p>
+</a>
