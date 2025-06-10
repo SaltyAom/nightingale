@@ -32,8 +32,8 @@ const props = Astro.props
 </noscript>
 
 <script>
-const easeOutExpo = (x) => x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
-const easeInExpo = (x) => x === 0 ? 0 : Math.pow(2, 10 * x - 10)
+const easeOutExpo = (x: number) => x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
+const easeInExpo = (x: number) => x === 0 ? 0 : Math.pow(2, 10 * x - 10)
 
 if(window.innerWidth >= 768) {
 	document.body.style.overflow = 'hidden'
@@ -41,22 +41,19 @@ if(window.innerWidth >= 768) {
 	document.addEventListener('DOMContentLoaded', () => {
 		const step = 17.5
 
-		const container = document.getElementById('peko')
-		const bg = document.getElementById('peko-bg')
-		const fg = document.getElementById('peko-fg')
-		const hint = document.getElementById('peko-hint')
-		const title = document.getElementById('peko-title')
-		const content = document.getElementById('peko-content')
-		const opacityContents = document.querySelectorAll('.peko-opacity')
-
-		let fgLoaded = false
-		let bgLoaded = false
+		const container = document.getElementById('peko')!
+		const bg = document.getElementById('peko-bg')!
+		const fg = document.getElementById('peko-fg')!
+		const hint = document.getElementById('peko-hint')!
+		const title = document.getElementById('peko-title')!
+		const content = document.getElementById('peko-content')!
+		const opacityContents = document.querySelectorAll('.peko-opacity')!
 
 		const start = async () => {
 			const top = document.documentElement.scrollTop / window.innerHeight * 100
 
-			title.style.opacity = 1
-			fg.style.opacity = 1
+			title.style.opacity = '1'
+			fg.style.opacity = '1'
 
 			fg.classList.add('peko-in')
 
@@ -96,10 +93,10 @@ if(window.innerWidth >= 768) {
 				if(top <= 50) {
 					fg.style.left = `calc(${10 * easeOutExpo(top / 50)}% + ${easeOutExpo(top / 50) * 150}px)`
 					bg.style.filter = `brightness(${1 - (easeOutExpo(top / 25)) * 0.1})`
-					title.style.opacity = 1 - easeOutExpo(1 * top / 50)
+					title.style.opacity = 1 - easeOutExpo(1 * top / 50) + ''
 					title.style.paddingLeft =  easeOutExpo(1 * top / 50) * 100 + '%'
 					opacityContents.forEach((el) => {
-						el.style.opacity = easeOutExpo(top / 100)
+						(el as HTMLElement).style.opacity = easeOutExpo(top / 100) + ''
 					})
 					content.style.transform = `translateX(-${easeInExpo(1 - top / 50) * 10}%)`
 
@@ -110,12 +107,12 @@ if(window.innerWidth >= 768) {
 				} else {
 					fg.style.left = 'calc(10% + 150px)'
 					bg.style.filter = 'brightness(0.9)'
-					title.style.opacity = 0.01
+					title.style.opacity = '0'
 					title.style.paddingLeft = '50%'
 					content.style.transform = 'translateX(0px)'
 					content.style.pointerEvents = 'auto'
 					opacityContents.forEach((el) => {
-						el.style.opacity = 1
+						(el as HTMLElement).style.opacity = '1'
 					})
 				}
 			}
