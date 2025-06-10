@@ -127,6 +127,10 @@ if(window.innerWidth >= 768) {
 		window.addEventListener('load', start, {
 			once: true
 		})
+
+  		document.addEventListener("astro:page-load", start, {
+		    once: true
+	    })
 	})
 }
 </script>
