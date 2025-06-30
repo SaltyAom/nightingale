@@ -202,59 +202,57 @@ import '../styles/index.css'
             </p>
         </main>
 
-        <footer class="flex flex-col w-full">
-            <section class="flex flex-col sm:flex-row-reverse">
-                <div class="flex flex-col sm:w-[36%]">
-                    <picture
-                        class="block bg-gray-100"
+        <footer class="flex flex-col-reverse sm:flex-row-reverse w-full">
+            <div class="flex flex-col-reverse sm:flex-col sm:w-[36%]">
+                <picture
+                    class="block bg-gray-100"
+                    style="aspect-ratio:9/14"
+                >
+                    <img
+                        loading="lazy"
+                        class="w-full object-cover aspect-9-14 object-center"
+                        src="/cosplay/ryousan.webp"
+                        alt="SaltyAom's casual in Ryousangata form"
                         style="aspect-ratio:9/14"
-                    >
-                        <img
-                            loading="lazy"
-                            class="w-full object-cover aspect-9-14 object-center"
-                            src="/cosplay/ryousan.webp"
-                            alt="SaltyAom's casual in Ryousangata form"
-                            style="aspect-ratio:9/14"
-                        />
-                    </picture>
-                    <picture class="block bg-gray-100">
-                        <img
-                            loading="lazy"
-                            class="w-full object-cover object-center"
-                            src="/cosplay/nightingale-close.webp"
-                            alt="SaltyAom's Nightingale cosplay holding a magical wand while looking up to the sky"
-                        />
-                    </picture>
-                </div>
+                    />
+                </picture>
+                <picture class="block bg-gray-100">
+                    <img
+                        loading="lazy"
+                        class="w-full object-cover object-center"
+                        src="/cosplay/nightingale-close.webp"
+                        alt="SaltyAom's Nightingale cosplay holding a magical wand while looking up to the sky"
+                    />
+                </picture>
+            </div>
 
-                <div class="flex flex-col sm:w-[64%]">
-                    <picture
-                        class="block bg-gray-100 aspect-16-10"
-                    >
-                        <img
-                            loading="lazy"
-                            class="w-full aspect-16-10 object-cover object-center"
-                            src="/cosplay/tingyun-cover.webp"
-                            alt="SaltyAom's Tingyun cosplay holding both hands resting on the chest"
-                        />
-                    </picture>
+            <div class="flex flex-col sm:w-[64%]">
+                <picture
+                    class="block bg-gray-100 aspect-16-10"
+                >
+                    <img
+                        loading="lazy"
+                        class="w-full aspect-16-10 object-cover object-center"
+                        src="/cosplay/tingyun-cover.webp"
+                        alt="SaltyAom's Tingyun cosplay holding both hands resting on the chest"
+                    />
+                </picture>
 
-                    <picture
-                        class="block bg-gray-100 aspect-16-10"
-                    >
-                        <img
-                            loading="lazy"
-                            class="w-full aspect-16-10 object-cover object-center"
-                            src="/cosplay/haruna-pose.webp"
-                            alt="SaltyAom's Haruna cosplay smiling at the camera"
-                        />
-                    </picture>
-                </div>
-            </section>
+                <picture
+                    class="block bg-gray-100 aspect-16-10"
+                >
+                    <img
+                        loading="lazy"
+                        class="w-full aspect-16-10 object-cover object-center"
+                        src="/cosplay/haruna-pose.webp"
+                        alt="SaltyAom's Haruna cosplay smiling at the camera"
+                    />
+                </picture>
+            </div>
         </footer>
 
         <section class="flex flex-col md:flex-row md:gap-4 max-w-8xl w-full mx-auto md:p-4 pb-0">
-        	<picture class="bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden ">
+        	<picture class="relative bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden ">
 	         	<img
 					class="h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
 					src="/cosplay/ryousan-3.webp"
@@ -262,7 +260,7 @@ import '../styles/index.css'
 					loading="lazy"
 				/>
          	</picture>
-         	<picture class="bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden">
+         	<picture class="relative bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden">
 	         	<img
 					class="h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
 					src="/cosplay/ryousan-2.webp"
@@ -270,7 +268,7 @@ import '../styles/index.css'
 					loading="lazy"
 				/>
           	</picture>
-          	<picture class="bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden">
+          	<picture class="relative bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden">
 	         	<img
 					class="h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
 					src="/cosplay/ryousan-1.webp"
