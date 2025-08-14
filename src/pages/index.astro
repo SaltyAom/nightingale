@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions'
 import Feature from '../components/feature.astro'
 import Parallax from '../components/parallax.astro'
+import Divider from '../components/divider.astro'
 
 import '../styles/index.css'
 ---
@@ -120,10 +121,12 @@ import '../styles/index.css'
         </Parallax>
 
         <main
-            class="lg:hidden flex flex-col w-full max-w-3xl px-4 mx-auto pt-24 pb-12 text-lg text-gray-700 dark:text-300 leading-8"
+            class="flex flex-col w-full max-w-3xl px-4 mx-auto pt-24 lg:pt-12 pb-12 text-lg text-gray-700 dark:text-300 leading-8"
         >
+ 			<Divider class="lg:flex hidden mb-8" />
+
             <h1 class="text-5xl text-black mb-4 font-serif">SaltyAom</h1>
-            <p>I love to make open source and cosplay.</p>
+            <p class="lg:mb-8">I code and cosplay.</p>
             <p>
                 Made
                 <a
@@ -151,7 +154,7 @@ import '../styles/index.css'
             </p>
 
             <picture
-                class="block bg-gray-100 my-4 rounded-xl aspect-3-2 overflow-hidden image-scale object-shadow"
+                class="lg:hidden block bg-gray-100 my-4 rounded-xl aspect-3-2 overflow-hidden image-scale object-shadow"
             >
                 <img
                     class="w-full aspect-3-2 object-cover object-center"
@@ -200,79 +203,76 @@ import '../styles/index.css'
                     My Blog
                 </a>
             </p>
+
+ 			<Divider class="mt-12" />
         </main>
 
         <footer class="flex flex-col-reverse sm:flex-row-reverse w-full">
             <div class="flex flex-col-reverse sm:flex-col sm:w-[36%]">
-                <picture
-                    class="block bg-gray-100"
+            	<div class="aspect-16-10 bg-gray-100 overflow-hidden"
                     style="aspect-ratio:9/14"
                 >
                     <img
                         loading="lazy"
-                        class="w-full object-cover aspect-9-14 object-center"
+                        class="w-full object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
                         src="/cosplay/ryousan.webp"
                         alt="SaltyAom's casual in Ryousangata form"
                         style="aspect-ratio:9/14"
                     />
-                </picture>
-                <picture class="block bg-gray-100">
+                </div>
+                <div class="bg-gray-100 overflow-hidden">
                     <img
                         loading="lazy"
-                        class="w-full object-cover object-center"
+                        class="w-full object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
                         src="/cosplay/nightingale-close.webp"
                         alt="SaltyAom's Nightingale cosplay holding a magical wand while looking up to the sky"
                     />
-                </picture>
+                </div>
             </div>
 
             <div class="flex flex-col sm:w-[64%]">
-                <picture
-                    class="block bg-gray-100 aspect-16-10"
-                >
+            <div class="aspect-16-10 bg-gray-100 overflow-hidden">
                     <img
                         loading="lazy"
-                        class="w-full aspect-16-10 object-cover object-center"
+                        class="w-full aspect-16-10 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
                         src="/cosplay/tingyun-cover.webp"
                         alt="SaltyAom's Tingyun cosplay holding both hands resting on the chest"
                     />
-                </picture>
+            </div>
 
-                <picture
-                    class="block bg-gray-100 aspect-16-10"
-                >
+            <div class="aspect-16-10 bg-gray-100 overflow-hidden">
                     <img
                         loading="lazy"
-                        class="w-full aspect-16-10 object-cover object-center"
+                        class="w-full aspect-16-10 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
                         src="/cosplay/haruna-pose.webp"
                         alt="SaltyAom's Haruna cosplay smiling at the camera"
                     />
-                </picture>
+                </div>
             </div>
         </footer>
 
-        <section class="relative flex flex-col md:flex-row md:gap-4 max-w-8xl w-full mx-auto md:p-4 pb-0">
-        	<picture class="bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden ">
+        <section class="relative flex flex-col md:flex-row max-w-8xl w-full mx-auto">
+        	<picture class="bg-gray-100 aspect-4-3 overflow-hidden ">
 	         	<img
 					class="w-full h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-					src="/cosplay/ryousan-3.webp"
-					alt="SaltyAom's in ryousangata form"
+					src="/cosplay/case-3.webp"
+					alt="SaltyAom sitting near a cannon"
 					loading="lazy"
 				/>
          	</picture>
-         	<picture class="bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden">
+         	<picture class="bg-gray-100 aspect-4-3 overflow-hidden">
 	         	<img
 					class="w-full h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-					src="/cosplay/ryousan-2.webp"
-					alt="SaltyAom's in ryousangata form"
+					src="/cosplay/case-2.webp"
+					alt="SaltyAom holding a pink pien cat plushie (p-chan)"
 					loading="lazy"
 				/>
           	</picture>
-          	<picture class="bg-gray-100 aspect-4-3 md:rounded-2xl overflow-hidden">
+          	<picture class="bg-gray-100 aspect-4-3 overflow-hidden">
 	         	<img
 					class="w-full h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-					src="/cosplay/ryousan-1.webp"
-					alt="SaltyAom's in ryousangata form"
+					src="/cosplay/case-1.webp"
+					alt="SaltyAom in a white ryousangata hoodie"
 				/>
            	</picture>
         </section>

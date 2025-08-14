@@ -33,10 +33,8 @@ const props = Astro.props
 
 <script data-astro-rerun is:inline>
 async function start() {
-	console.log("START")
-
-	let easeOutExpo = (x) => x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
-	let easeInExpo = (x) => x === 0 ? 0 : Math.pow(2, 10 * x - 10)
+	let easeOutExpo = (x) => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x)
+	let easeInExpo = (x) => x <= 0 ? 0 : Math.pow(2, 10 * x - 10)
 
 	let step = 17.5
 
@@ -86,22 +84,20 @@ async function start() {
 	})
 
 	const position = () => {
-		const top = document.documentElement.scrollTop / window.innerHeight * 100
+		const top = document.documentElement.scrollTop / window.innerHeight * 2
 
-		if(top <= 50) {
-			fg.style.left = `calc(${10 * easeOutExpo(top / 50)}% + ${easeOutExpo(top / 50) * 150}px)`
-			bg.style.filter = `brightness(${1 - (easeOutExpo(top / 25)) * 0.1})`
-			title.style.opacity = 1 - easeOutExpo(1 * top / 50) + ''
-			title.style.paddingLeft =  easeOutExpo(1 * top / 50) * 100 + '%'
+		if(top <= 0.5) {
+			fg.style.left = `calc(${10 * easeOutExpo(top)}% + ${easeOutExpo(top) * 150}px)`
+			bg.style.filter = `brightness(${1 - (easeOutExpo(top / 2)) * 0.1})`
+			title.style.opacity = 1 - easeOutExpo(top) + ''
+			title.style.paddingLeft =  easeOutExpo(top) * 100 + '%'
+			title.style.scale = 1 + easeOutExpo(top) + ''
 			opacityContents.forEach((el) => {
-				el.style.opacity = easeOutExpo(top / 100) + ''
+				el.style.opacity = easeOutExpo(top / 2) + ''
 			})
-			content.style.transform = `translateX(-${easeInExpo(1 - top / 50) * 10}%)`
-
-			if(top < 20)
-				content.style.pointerEvents = 'none'
-			else
-				content.style.pointerEvents = 'auto'
+			content.style.transform = `translateX(-${easeInExpo(1 - top) * 10}%)`
+			content.style.scale = easeOutExpo(top) + ''
+			content.style.pointerEvents = 'none'
 		} else {
 			fg.style.left = 'calc(10% + 150px)'
 			bg.style.filter = 'brightness(0.9)'
@@ -138,7 +134,7 @@ if(window.innerWidth >= 768) {
 
 #peko-bg, #peko-fg, #peko-title {
 	transition: transform 2s var(--ease-out-expo);
-	will-change: transform;
+	will-change: transform, scale, opacity;
 
  	/* Webkit GPU acceleration hack for some reason */
     /* https://stackoverflow.com/a/21364496 */
