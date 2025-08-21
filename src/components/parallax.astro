@@ -76,8 +76,8 @@ async function start() {
 		const x = (event.clientX - rect.left) / rect.width
 		const y = (event.clientY - rect.top) / rect.height
 
-		bg.style.transform = `translate(${x * step * 2}px, ${y * step * 2}px) translateZ(0)`
-		title.style.transform = `translate(${x * step * 1.5}px, ${y * step * 1.5}px) translateZ(0)`
+		bg.style.transform = `translate(${x * step * 2.5}px, ${y * step * 2.5}px) translateZ(0)`
+		title.style.transform = `translate(${x * step * 1.75}px, ${y * step * 1.75}px) translateZ(0)`
 		fg.style.transform = `translate(${x * step}px, ${y * step}px) translateZ(0)`
 	}, {
 		passive: true
@@ -133,13 +133,17 @@ if(window.innerWidth >= 768) {
 }
 
 #peko-bg, #peko-fg, #peko-title {
-	transition: transform 2s var(--ease-out-expo);
+	/*transition: transform 2s var(--ease-out-expo);*/
 	will-change: transform, scale, opacity;
 
  	/* Webkit GPU acceleration hack for some reason */
     /* https://stackoverflow.com/a/21364496 */
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
+}
+
+#peko-bg, #peko-fg, #peko-title, #peko-content {
+	transition: all .625s var(--ease-out-expo);
 }
 
 .peko-in {
