@@ -61,7 +61,7 @@ const slug = Astro.params.slug
 	       			<img
 						src={cover}
 						alt={title}
-						class="aspect-16-10 w-full object-cover object-center rounded-xl select-none scale-105 blur-2xl opacity-30 pointer-none:"
+						class="aspect-16-10 w-full object-cover object-center rounded-xl select-none scale-105 blur-3xl opacity-40 pointer-none:"
 					/>
 				</div>
                	<div
@@ -96,46 +96,46 @@ const slug = Astro.params.slug
 						class="absolute aspect-16-10 w-full object-cover object-center rounded-xl select-none"
 					/>
 				    <div
-				     	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black/80 to-transparent rounded-xl"
+				     	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black/60 to-transparent rounded-xl"
 				     	transition:name={`blog-overlay-${slug}`}
 				    />
 			        <div
 						class="z-10 flex flex-col justify-end min-h-24 text-white p-4 max-w-2xl"
 					>
-	                    <h4
-							class="z-10 text-2xl sm:text-3xl font-serif text-shadow leading-11"
-							transition:name={`blog-title-${slug}`}
-						>
-	                       	{title}
-	                    </h4>
-
 						{tags.length > 0 && (
 							<ul
-								class="z-10 flex flex-wrap gap-1.5 mt-2"
+								class="z-10 flex flex-wrap gap-1.5 mb-2"
 								aria-label="Tags"
 								transition:name={`blog-tags-${slug}`}
 							>
 								{tags.map((tag: string) => (
-									<li class="text-xs bg-white/15 border border-white/20 rounded-full px-2 py-0.5">
+									<li class="text-xs bg-black/20 sm:bg-white/12.5 border border-white/25 rounded-full px-2 py-0.5 text-shadow-sm text-shadow-black/20">
 										{tag}
 									</li>
 								))}
 							</ul>
 						)}
+
+	                    <h4
+							class="z-10 text-2xl sm:text-3xl font-serif text-shadow sm:leading-11 text-shadow-sm text-shadow-black/50"
+							transition:name={`blog-title-${slug}`}
+						>
+	                       	{title}
+	                    </h4>
 			        </div>
 
 					<ProgressiveBlur transition:name={`blog-overlay-blur-${slug}`} />
                </div>
 
-               	<section class="flex gap-2 mt-4 mb-2">
-                	<img src="/blog/saltyaom.webp" alt="SaltyAom" class="size-12 rounded-full border border-neutral-200 bg-neutral-100 z-50" />
+               	<a class="flex gap-2 mt-2 mb-4" href="/">
+                	<img src="/blog/saltyaom.webp" alt="SaltyAom" class="size-12 rounded-full border border-neutral-200 bg-neutral-200 z-50" />
               		<div class="flex flex-col justify-center">
                 		<h3 class="font-medium text-lg text-neutral-700">SaltyAom</h3>
                			<time class="z-10 text-xs text-neutral-400" datetime={dayjs(date).format('YYYY-MM-DD')}>
                  			{dayjs(date).format('D MMM YYYY')}
                  		</time>
                  	</div>
-               	</section>
+               	</a>
          	</header>
 			<article id="blog-content">
             	<slot />

@@ -90,10 +90,10 @@ const posts = await getCollection('blog')
          	</header>
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full mx-auto pt-4">
                 {
-                    posts.toReversed().map(({ id: slug, data: { title, cover, tags } }) => (
-                        <a href={`/blog/${slug}`} class="relative w-full object-shadow image-scale clickable active:scale-98! active:duration-150! active:ease-in rounded-xl">
+                    posts.toSorted((a, b) => b.data.date.getTime() - a.data.date.getTime()).map(({ id: slug, data: { title, cover, tags } }) => (
+                        <a href={`/blog/${slug}`} class="relative w-full rounded-xl">
                             <article
-                            	class="relative flex flex-col justify-end gap-2 w-full aspect-16-10 overflow-hidden rounded-xl"
+                            	class="relative flex flex-col justify-end gap-2  w-full aspect-16-10 object-shadow image-scale clickable active:scale-98! active:duration-150! active:ease-in overflow-hidden rounded-xl"
                             	transition:name={`blog-container-${slug}`}
                             >
                             	<img
@@ -103,28 +103,28 @@ const posts = await getCollection('blog')
                                  	transition:name={`blog-cover-${slug}`}
                                 />
                                 <div
-                                	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black/80 to-transparent rounded-lg"
+                                	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black/60 to-transparent rounded-lg"
                                 	transition:name={`blog-overlay-${slug}`}
                                 />
                                 <div
                                 	class="z-20 flex flex-col justify-end min-h-24 text-white px-3 pb-3"
                                 >
-	                                <h4 class="text-2xl font-serif" transition:name={`blog-title-${slug}`}>
-	                                	{title}
-	                                </h4>
 									{tags.length > 0 && (
 										<ul
-											class="flex flex-wrap gap-1.5 mt-2"
+											class="flex flex-wrap gap-1.5 mb-2"
 											aria-label="Tags"
 											transition:name={`blog-tags-${slug}`}
 										>
 											{tags.map((tag) => (
-												<li class="text-xs bg-white/15 border border-white/20 rounded-full px-2 py-0.5">
+												<li class="text-xs bg-black/20 xl:bg-white/12.5 text-shadow-xs text-shadow-black/50 border border-white/25 rounded-full px-2 py-0.5">
 													{tag}
 												</li>
 											))}
 										</ul>
 									)}
+	                                <h4 class="text-2xl font-serif text-shadow-sm text-shadow-black/50" transition:name={`blog-title-${slug}`}>
+	                                	{title}
+	                                </h4>
                                 </div>
                                 <ProgressiveBlur transition:name={`blog-overlay-blur-${slug}`} />
                             </article>
