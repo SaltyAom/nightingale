@@ -1,0 +1,34 @@
+<div class="progressive-blur" aria-hidden="true">
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</div>
+
+<style>
+	.progressive-blur {
+		position: absolute;
+		inset: auto 0 0;
+		z-index: 5;
+		height: 55%;
+		pointer-events: none;
+	}
+
+	.progressive-blur > div {
+		position: absolute;
+		inset: 0;
+		-webkit-mask-image: linear-gradient(to bottom, transparent var(--start), black var(--end));
+		mask-image: linear-gradient(to bottom, transparent var(--start), black var(--end));
+		-webkit-backdrop-filter: blur(var(--blur));
+		backdrop-filter: blur(var(--blur));
+	}
+
+	.progressive-blur > div:nth-child(1) { --start: 0%; --end: 25%; --blur: 0.5px; }
+	.progressive-blur > div:nth-child(2) { --start: 15%; --end: 40%; --blur: 1px; }
+	.progressive-blur > div:nth-child(3) { --start: 30%; --end: 55%; --blur: 2px; }
+	.progressive-blur > div:nth-child(4) { --start: 45%; --end: 70%; --blur: 4px; }
+	.progressive-blur > div:nth-child(5) { --start: 60%; --end: 85%; --blur: 8px; }
+	.progressive-blur > div:nth-child(6) { --start: 75%; --end: 100%; --blur: 16px; }
+</style>

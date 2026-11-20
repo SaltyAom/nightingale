@@ -30,20 +30,26 @@ html, body {
  	box-shadow: 0 15px 45px rgba(0,0,0,.4);
 }
 
+
 #blog {
 	@apply flex flex-col max-w-3xl w-full mx-auto py-4 md:py-8 px-4 md:px-0 transition-all;
 }
 
 #blog-content {
-	@apply flex flex-col w-full leading-relaxed text-gray-700 gap-3;
+	@apply flex flex-col w-full leading-7.5 text-neutral-700 gap-5 text-lg;
 }
 
 #blog-content > h2 {
 	@apply text-3xl font-serif text-black my-2 leading-relaxed;
 }
 
-#blog-content > p {
-	@apply leading-relaxed;
+#blog-content > blockquote {
+	@apply text-3xl font-serif text-black my-4 leading-relaxed;
+}
+
+#blog-content > em,
+#blog-content > p > em {
+	@apply text-neutral-400 font-light;
 }
 
 #blog-content > hr {
@@ -103,7 +109,7 @@ html, body {
 }
 
 .blog-utils {
-	@apply flex justify-center items-center w-7 h-7 text-gray-500 hover:text-blue-500 focus:text-blue-500 transition-colors;
+	@apply flex justify-center items-center w-7 h-7 text-neutral-500 hover:text-blue-500 focus:text-blue-500 transition-colors;
 }
 
 .blog-utils.-small {

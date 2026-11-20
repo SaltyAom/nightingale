@@ -2,11 +2,11 @@
 import { ClientRouter } from 'astro:transitions'
 
 import dayjs from 'dayjs'
+import ProgressiveBlur from '../components/progressive-blur.astro'
 import './blog.css'
 
-const { title, description, cover, date } = Astro.props
+const { title, description, cover, date, tags } = Astro.props
 
-const url = Astro.request.url
 const slug = Astro.params.slug
 ---
 
@@ -47,13 +47,25 @@ const slug = Astro.params.slug
         <meta name="twitter:creator" content="@saltyaom">
 
         <link rel="preload" href={cover} as="image" />
+
+        <meta name="keywords" content={tags.join(', ')} />
+        <meta name="robots" content="index, follow" />
     </head>
 
     <body>
         <main id="blog">
-        	<header class="flex flex-col w-full">
-               <div
-               		class="relative flex flex-col justify-end gap-2 w-full mb-4 aspect-16-10 object-shadow image-scale overflow-hidden rounded-xl"
+        	<header class="relative flex flex-col w-full">
+	         	<div
+		       		class="absolute flex justify-center w-full aspect-16-10"
+				>
+	       			<img
+						src={cover}
+						alt={title}
+						class="aspect-16-10 w-full object-cover object-center rounded-xl select-none scale-105 blur-2xl opacity-30 pointer-none:"
+					/>
+				</div>
+               	<div
+               		class="relative flex flex-col justify-end gap-2 w-full mb-4 aspect-16-10 overflow-hidden rounded-xl"
                  	transition:name={`blog-container-${slug}`}
                 >
                		<a
@@ -84,33 +96,53 @@ const slug = Astro.params.slug
 						class="absolute aspect-16-10 w-full object-cover object-center rounded-xl select-none"
 					/>
 				    <div
-				     	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black to-transparent rounded-xl"
+				     	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black/80 to-transparent rounded-xl"
 				     	transition:name={`blog-overlay-${slug}`}
 				    />
 			        <div
-						class="z-10 flex flex-col justify-end min-h-24 text-white p-4"
+						class="z-10 flex flex-col justify-end min-h-24 text-white p-4 max-w-2xl"
 					>
 	                    <h4
-							class="text-2xl sm:text-3xl font-serif"
+							class="z-10 text-2xl sm:text-3xl font-serif text-shadow leading-11"
 							transition:name={`blog-title-${slug}`}
 						>
 	                       	{title}
 	                    </h4>
-	                    <p
-							class="text-sm text-white opacity-75 mt-0.5"
-							transition:name={`blog-date-${slug}`}
-						>
-							{dayjs(date).format('MMMM D, YYYY')}
-						</p>
+
+						{tags.length > 0 && (
+							<ul
+								class="z-10 flex flex-wrap gap-1.5 mt-2"
+								aria-label="Tags"
+								transition:name={`blog-tags-${slug}`}
+							>
+								{tags.map((tag: string) => (
+									<li class="text-xs bg-white/15 border border-white/20 rounded-full px-2 py-0.5">
+										{tag}
+									</li>
+								))}
+							</ul>
+						)}
 			        </div>
+
+					<ProgressiveBlur transition:name={`blog-overlay-blur-${slug}`} />
                </div>
-			</header>
+
+               	<section class="flex gap-2 mt-4 mb-2">
+                	<img src="/blog/saltyaom.webp" alt="SaltyAom" class="size-12 rounded-full border border-neutral-200 bg-neutral-100 z-50" />
+              		<div class="flex flex-col justify-center">
+                		<h3 class="font-medium text-lg text-neutral-700">SaltyAom</h3>
+               			<time class="z-10 text-xs text-neutral-400" datetime={dayjs(date).format('YYYY-MM-DD')}>
+                 			{dayjs(date).format('D MMM YYYY')}
+                 		</time>
+                 	</div>
+               	</section>
+         	</header>
 			<article id="blog-content">
             	<slot />
             </article>
             <footer class="flex flex-col w-full">
            		<section class="flex items-center mt-4">
-   					<a id="blog-share-x" class="blog-utils" href={`https://x.com/share?text=${url}`} target="_blank">
+   					<!-- <a id="blog-share-x" class="blog-utils" href={`https://x.com/share?text=${url}`} target="_blank">
         				<svg
             				xmlns="http://www.w3.org/2000/svg"
                 			width="24px"
@@ -128,9 +160,9 @@ const slug = Astro.params.slug
 						<svg xmlns="http://www.w3.org/2000/svg" width="600" height="24" version="1.1">
 							<path style="transform: scale(.0425)" d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z" fill="currentColor" />
  						</svg>
-					</a>
+					</a> -->
 
-					<button id="blog-share" class="blog-utils" onclick="share()" class="cursor-pointer">
+					<button id="blog-share" class="flex gap-1 items-center text-sm rounded-full text-neutral-600 font-medium bg-neutral-100 px-3 py-1 hover:scale-110 focus:scale-110 active:scale-98 transition-transform ease-out duration-300 active:duration-150" onclick="share()" class="cursor-pointer">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -143,12 +175,14 @@ const slug = Astro.params.slug
 							stroke-linecap="round"
 							stroke-linejoin="round"
   							style="transform: scale(.95) translateY(-1px) translateX(-1px)"
-         					class="cursor-pointer"
+         					class="cursor-pointer w-3.5"
 						>
 							<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
 							<polyline points="16 6 12 2 8 6"/>
 							<line x1="12" y1="2" x2="12" y2="15"/>
 						</svg>
+
+						<p>Share</p>
 					</button>
            		</section>
 

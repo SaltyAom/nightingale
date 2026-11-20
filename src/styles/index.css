@@ -23,13 +23,14 @@ body {
 }
 
 .image-scale {
-	@apply hover:scale-105 hover:rounded-lg;
+	@apply hover:scale-105 focus:scale-105;
 	transition-property: scale, border-radius box-shadow;
 	transition-duration: 0.7s;
 	transition-timing-function: var(--ease-out-expo);
 }
 
-.image-scale:hover {
+.image-scale:hover,
+.image-scale:focus {
 	@apply z-10;
 	box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
 }
@@ -37,10 +38,14 @@ body {
 @custom-variant hocus (&:hover, &:focus);
 
 @utility link-base {
-	@apply inline-block h-8 px-1.5 transform hover:scale-110 rounded-lg cursor-pointer;
+	@apply inline-block h-8 px-1.5 transform hover:scale-110 rounded-lg cursor-pointer active:scale-98 active:duration-150;
 	transition-property: color, background-color, scale;
 	transition-duration: 0.7s;
 	transition-timing-function: var(--ease-out-expo);
+}
+
+.clickable {
+	@apply cursor-pointer active:scale-98 active:duration-150;
 }
 
 .link-pink {

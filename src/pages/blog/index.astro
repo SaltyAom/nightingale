@@ -2,9 +2,8 @@
 import { getCollection } from 'astro:content'
 import { ClientRouter } from 'astro:transitions'
 
-import dayjs from 'dayjs'
-
 import '../../layouts/blog.css'
+import ProgressiveBlur from '../../components/progressive-blur.astro';
 
 const posts = await getCollection('blog')
 ---
@@ -15,7 +14,7 @@ const posts = await getCollection('blog')
 	    <title>SaltyAom - Blog</title>
 		<ClientRouter />
 
-  		<meta name="charset" content="utf-8" />
+		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	    <meta name="description" content="Collection of blog written by SaltyAom" />
@@ -47,11 +46,16 @@ const posts = await getCollection('blog')
 	    <meta name="twitter:site" content="@saltyaom">
 	    <meta name="twitter:image" content="https://saltyaom.com/cosplay/ely-cover.webp">
 	    <meta name="twitter:creator" content="@saltyaom">
+
+		<meta name="robots" content="index, follow" />
     </head>
     <body>
         <main class="px-4 xl:px-0">
         	<header class="flex flex-col justify-between items-center pt-12">
-				<a href="/" class="font-serif text-5xl font-medium">SaltyAom</a>
+				<a href="/" class="flex items-center gap-4 font-serif text-5xl font-medium">
+   					<img src="/blog/saltyaom.webp" alt="SaltyAom" class="size-12" />
+					SaltyAom
+				</a>
 				<section class="flex items-center mt-3">
 					<a id="blog-share-x" class="blog-utils" href="https://x.com/saltyaom" target="_blank">
 						<svg
@@ -86,10 +90,10 @@ const posts = await getCollection('blog')
          	</header>
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl w-full mx-auto pt-4">
                 {
-                    posts.toReversed().map(({ slug, data: { title, cover, date } }) => (
-                        <a href={`/blog/${slug}`} class="relative w-full">
+                    posts.toReversed().map(({ id: slug, data: { title, cover, tags } }) => (
+                        <a href={`/blog/${slug}`} class="relative w-full object-shadow image-scale clickable active:scale-98! active:duration-150! active:ease-in rounded-xl">
                             <article
-                            	class="relative flex flex-col justify-end gap-2 w-full aspect-16-10 object-shadow image-scale overflow-hidden rounded-xl"
+                            	class="relative flex flex-col justify-end gap-2 w-full aspect-16-10 overflow-hidden rounded-xl"
                             	transition:name={`blog-container-${slug}`}
                             >
                             	<img
@@ -99,19 +103,30 @@ const posts = await getCollection('blog')
                                  	transition:name={`blog-cover-${slug}`}
                                 />
                                 <div
-                                	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black to-transparent rounded-lg"
+                                	class="absolute left-0 bottom-0 z-10 w-full min-h-32 bg-linear-to-t from-black/80 to-transparent rounded-lg"
                                 	transition:name={`blog-overlay-${slug}`}
                                 />
                                 <div
-                                	class="z-20 flex flex-col justify-end min-h-24 text-white px-4 pb-3"
+                                	class="z-20 flex flex-col justify-end min-h-24 text-white px-3 pb-3"
                                 >
 	                                <h4 class="text-2xl font-serif" transition:name={`blog-title-${slug}`}>
 	                                	{title}
 	                                </h4>
-	                                <p class="text-xs text-white opacity-75 mt-1.5" transition:name={`blog-date-${slug}`}>
-										{dayjs(date).format('MMMM D, YYYY')}
-									</p>
+									{tags.length > 0 && (
+										<ul
+											class="flex flex-wrap gap-1.5 mt-2"
+											aria-label="Tags"
+											transition:name={`blog-tags-${slug}`}
+										>
+											{tags.map((tag) => (
+												<li class="text-xs bg-white/15 border border-white/20 rounded-full px-2 py-0.5">
+													{tag}
+												</li>
+											))}
+										</ul>
+									)}
                                 </div>
+                                <ProgressiveBlur transition:name={`blog-overlay-blur-${slug}`} />
                             </article>
                         </a>
                     ))

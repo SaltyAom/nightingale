@@ -47,6 +47,8 @@ import '../styles/index.css'
 
         <link rel="preload" href="/cosplay/pekomama-fg.webp" as="image" />
         <link rel="preload" href="/cosplay/pekomama-bg.webp" as="image" />
+
+        <meta name="robots" content="index, follow" />
     </head>
     <body>
     	<Parallax class="hidden lg:block">
@@ -120,10 +122,15 @@ import '../styles/index.css'
       		</header>
         </Parallax>
 
+        <div class="flex justify-end lg:hidden max-w-3xl mx-auto mt-2 px-2">
+      		<a href="/blog" class="text-sm font-medium text-blue-500 bg-blue-500/10 px-3 py-1.5 rounded-full hover:scale-110 focus:scale-110 active:scale-98 active:duration-150 transition-transform ease-out duration-200">Blog</a>
+        </div>
+
         <main
             class="flex flex-col w-full max-w-3xl px-4 mx-auto pt-24 lg:pt-12 pb-12 text-lg text-gray-700 dark:text-300 leading-8"
         >
- 			<Divider class="lg:flex hidden mb-8" />
+
+        	<Divider class="lg:flex hidden mb-8" />
 
             <h1 class="text-5xl text-black mb-4 font-serif">SaltyAom</h1>
             <p class="lg:mb-8">I code and cosplay.</p>
