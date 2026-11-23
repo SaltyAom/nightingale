@@ -1,0 +1,53 @@
+---
+const tools = [
+	['Node.js', 'nodejs.svg'],
+	['Bun', 'bun.svg'],
+	['TypeScript', 'typescript.svg'],
+	['React', 'react.svg'],
+	['Next.js', 'nextjs.svg'],
+	['Vue', 'vuejs.svg'],
+	['Nuxt', 'nuxtjs.svg'],
+	['Svelte', 'svelte.svg'],
+	['Astro', 'astro.svg'],
+	['Tauri', 'tauri.svg'],
+	['Express', 'express.svg'],
+	['Fastify', 'fastify.svg'],
+	['NestJS', 'nestjs.svg'],
+	['Prisma', 'prisma.svg'],
+	['Drizzle', 'drizzle.svg'],
+	['Expo', 'expo.svg'],
+	['Dart', 'dart.svg'],
+	['Flutter', 'flutter.svg'],
+	['Rust', 'rust.svg'],
+	['Actix Web', 'actix.png'],
+	['GraphQL', 'graphql.svg'],
+	['Coolify', 'coolify.svg'],
+	['Dokploy', 'dokploy.svg'],
+	['AWS', 'aws.svg'],
+	['GCP', 'gcp.svg'],
+	['Cloudflare stack eg. Worker, R2, etc.', 'cloudflare.svg'],
+	['Elysia', '../elysia.svg'],
+]
+---
+
+<ul
+	class="mt-4 flex list-none flex-wrap items-center gap-4 p-0"
+	aria-label="Tools I'm familiar with"
+>
+	{tools.map(([name, file]) => (
+		<li class="flex shrink-0 items-center gap-4" title={name}>
+			<img
+				src={`/assets/tools/${file}`}
+				alt={name}
+				width="32"
+				height="32"
+				class="block size-8 object-contain"
+				loading="lazy"
+				decoding="async"
+			/>
+			{name === 'Elysia' && (
+				<span class="sm:block text-gray-400 text-xs">← I made this one</span>
+			)}
+		</li>
+	))}
+</ul>

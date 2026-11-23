@@ -5,6 +5,7 @@ import Parallax from '../components/parallax.astro'
 import ParallaxPhoto from '../components/parallax-photo.astro'
 import Divider from '../components/divider.astro'
 import TalksMap from '../components/talks-map.astro'
+import ToolLogos from '../components/tool-logos.astro'
 import StructuredData from '../components/structured-data.astro'
 import { person, siteUrl, website } from '../lib/structured-data'
 
@@ -220,7 +221,10 @@ import '../styles/index.css'
 			<h1 class="text-5xl text-black md:mt-8 mb-4 font-serif">
 				SaltyAom here
 			</h1>
-			<p class="lg:mb-8">I code and cosplay.</p>
+			<p>I code and cosplay.</p>
+
+			<br />
+
 			<p>
 				Made
 				<a
@@ -274,7 +278,7 @@ import '../styles/index.css'
 				/>
 			</picture>
 
-			<br />
+			<br class="hidden lg:block" />
 
 			<p>Was a design engineer at Brikl.</p>
 			<p>
@@ -341,12 +345,9 @@ import '../styles/index.css'
 
 			<br />
 
-			<p>I'm familiar with these tools:</p>
-			<img
-				src="https://skillicons.dev/icons?i=bun,typescript,dart,flutter,rust,go,elysia,actix,react,nextjs,vue,nuxt,svelte,astro,graphql"
-				alt="bun,typescript,dart,flutter,rust,go,elysia,actix,react,nextjs,vue,nuxt,svelte,astro,graphql"
-				style="aspect-ratio: 368/21"
-			/>
+			<p>I'm familiar <span class="text-gray-400 font-light text-sm">(but not limited to)</span> with these tools:</p>
+
+			<ToolLogos />
 
 			<TalksMap />
 
