@@ -1,0 +1,387 @@
+---
+const talks = [
+	{
+		event: 'BKK.JS #14',
+		title: "How I've Reduced a 2MB Web App to 14KB",
+		date: 'Oct 2020',
+		href: 'https://creatorsgarten.org/event/bkkjs14',
+		line: 'bangkok'
+	},
+	{
+		event: 'Svelte Meetup Bangkok #1',
+		title: 'Svelte in every codebase',
+		date: 'Jun 2022',
+		href: 'https://www.youtube.com/watch?v=ZRQg3b4Y_1A',
+		line: 'bangkok'
+	},
+	{
+		event: 'Side Project Showdown',
+		title: 'Elysia',
+		date: 'Jul 2023',
+		href: 'https://www.youtube.com/watch?v=7V7h0idgP7o',
+		line: 'bangkok'
+	},
+	{
+		event: 'TypeScript Community Meetup',
+		title: 'Advanced Generics',
+		date: 'Jul 2023',
+		href: 'https://www.youtube.com/watch?v=vMWpCWoKotQ',
+		line: 'online'
+	},
+	{
+		event: 'GitHub Universe After Party',
+		title: 'Profit from Open Source with GitHub Sponsors',
+		date: 'Nov 2023',
+		href: 'https://www.youtube.com/watch?v=9HbM7D-J5xU',
+		line: 'bangkok'
+	},
+	{
+		event: 'Thailand Developer Day 2024',
+		title: 'Making Recursive Type in TypeScript',
+		date: 'Feb 2024',
+		href: 'https://medium.com/@boatchrnthn/recapping-thailand-developer-day-2024-267bf4710650',
+		line: 'bangkok'
+	},
+	{
+		event: 'BKK.JS #20',
+		title: 'Social Engineering of making a framework',
+		date: 'May 2024',
+		href: 'https://www.youtube.com/watch?v=qUbnQCHcZLU',
+		line: 'bangkok'
+	},
+	{
+		event: 'Elysia Maintainer Meetup',
+		title: 'Elysia maintainer',
+		date: 'May 2024',
+		href: 'https://www.youtube.com/watch?v=O9VAd8ELntA',
+		line: 'online'
+	},
+	{
+		event: 'JavaScript Bangkok 2.0.0',
+		title: 'What if TypeScript has Type Integrity',
+		date: 'Oct 2024',
+		href: 'https://www.youtube.com/watch?v=jjxu614FG80',
+		line: 'bangkok'
+	},
+	{
+		event: 'Thailand Developer Day 2025',
+		title: 'Practical Unpractical in Open Source Software',
+		date: 'Feb 2025',
+		href: 'https://www.eventpop.me/e/76225/th-dev-day-2025',
+		line: 'bangkok'
+	},
+	{
+		event: 'FOSSASIA Summit 2025',
+		title: 'Practical Impractical in Open Source library',
+		date: 'Mar 2025',
+		href: 'https://www.youtube.com/watch?v=M4KzBnLY4lk',
+		line: 'bangkok'
+	},
+	{
+		event: 'CityJS Singapore 2026',
+		title: 'Going deeper with type',
+		date: 'Feb 2026',
+		href: 'https://singapore.cityjsconf.org/speakers',
+		line: 'overseas'
+	},
+	{
+		event: 'BKK.JS #24',
+		title: 'Type Safe Server to Client',
+		date: 'Mar 2026',
+		href: 'https://www.youtube.com/watch?v=Diiaj4vOPjE',
+		line: 'bangkok'
+	},
+	{
+		event: 'Vue Fes Japan 2026',
+		title: 'Future of Server-Side Frameworks',
+		date: 'Oct 2026',
+		href: 'https://vuefes.jp/2026/en/event',
+		line: 'overseas'
+	},
+	{
+		event: 'MEGA AI Skills Fest 2026',
+		title: 'Upcoming appearance',
+		date: 'Nov 2026',
+		href: 'https://www.bitec.co.th/news/event/mega-ai-skills-fest',
+		line: 'bangkok',
+		upcoming: true
+	}
+]
+const lineColors: Record<string, string> = {
+	bangkok: '[--station-color:var(--rail-bangkok)]',
+	online: '[--station-color:var(--rail-online)]',
+	overseas: '[--station-color:var(--rail-overseas)]'
+}
+
+const routes = [
+	{ name: 'Bangkok', class: 'bangkok' },
+	{ name: 'Online', class: 'online' },
+	{ name: 'Overseas', class: 'overseas' }
+]
+---
+
+<section
+	class="talks mt-16 mb-6 w-full text-[#202733] md:mt-20 [--rail-bangkok:#d34d59] [--rail-online:#38875a] [--rail-overseas:#4c79c6] [--rail-width:3px] [--branch-offset:2rem] [--label-gap:1.25rem] md:[--branch-offset:3rem] md:[--label-gap:1.5rem]"
+	aria-labelledby="talks-heading"
+>
+	<header class="talks-heading">
+		<h2
+			id="talks-heading"
+			class="m-0 font-serif text-5xl font-medium leading-[1.1] tracking-[-0.035em]"
+		>
+			My Talks
+		</h2>
+		<p class="mt-4 max-w-136 text-base leading-[1.6] text-[#5f6876]">
+			A route through conference talks, meetups, and panels.
+		</p>
+	</header>
+	<ul
+		class="route-legend mt-6 mb-10 flex list-none flex-wrap gap-x-6 gap-y-3 p-0 text-xs leading-[inherit] font-semibold text-[#596170]"
+		aria-label="Talk locations"
+	>
+		{routes.map((route) => (
+			<li class="flex items-center gap-2">
+				<span
+					class:list={[
+						'legend-line h-(--rail-width) w-6 rounded-full bg-(--station-color)',
+						lineColors[route.class]
+					]}
+					aria-hidden="true"
+				></span>
+				{route.name}
+			</li>
+		))}
+	</ul>
+	<talks-routes class="block">
+		<ol class="stations relative m-0 ml-2.5 list-none p-0">
+			{talks.map((talk) => (
+				<li
+					class:list={[
+						'talk-station relative',
+						lineColors[talk.line],
+						`line-${talk.line}`,
+						{
+							branch: talk.line !== 'bangkok',
+							upcoming: talk.upcoming
+						}
+					]}
+				>
+					{talk.line !== 'bangkok' && (
+						<svg
+							class="branch-route pointer-events-none absolute inset-0 hidden size-full overflow-visible fill-none stroke-(--station-color) [stroke-width:var(--rail-width)] [stroke-linecap:round] [stroke-linejoin:round]"
+							aria-hidden="true"
+						>
+							<path />
+						</svg>
+					)}
+					{talk.line === 'bangkok' && (
+						<svg
+							class="main-route pointer-events-none absolute inset-0 hidden size-full overflow-visible fill-none stroke-(--station-color) [stroke-width:var(--rail-width)] [stroke-linecap:round] [stroke-linejoin:round]"
+							aria-hidden="true"
+						>
+							<path />
+						</svg>
+					)}
+					<a
+						class="group/station relative grid min-h-26 grid-cols-[minmax(0,1fr)] grid-rows-[auto_auto_auto] content-center gap-y-1 rounded-lg py-4 pr-0 pl-[calc(var(--branch-offset)+var(--label-gap))] text-inherit no-underline focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-(--station-color) focus-visible:outline-offset-5"
+						href={talk.href}
+						target="_blank"
+						rel="noreferrer"
+					>
+						<span class="station-label col-start-1 row-span-3 row-start-1 grid origin-left grid-rows-subgrid transition-transform duration-100 ease-out group-hover/station:scale-110 group-focus/station:scale-110">
+							<span class="station-meta flex flex-wrap items-center gap-3 text-xs leading-normal text-[#626c7b] tabular-nums">
+								<time>{talk.date}</time>
+								{talk.line !== 'bangkok' && (
+									<span class="font-semibold text-(--station-color)">
+										{talk.line === 'online'
+											? 'Online'
+											: 'Overseas'}
+									</span>
+								)}
+							</span>
+							<strong class="text-base font-[650] leading-[1.4] group-hover/station:text-(--station-color) group-active/station:text-(--station-color)">
+								{talk.event}
+							</strong>
+							<span class="talk-title text-sm leading-normal text-[#626c7b]">
+								{talk.title}
+							</span>
+						</span>
+						<span
+							class="pointer-events-none relative col-start-1 row-start-2 h-0 self-start text-base"
+							aria-hidden="true"
+						>
+							<span
+								class:list={[
+									'station-mark absolute top-[0.7em] z-1 size-3.25 rounded-full border-3 border-(--station-color) transform-[translate(-50%,-50%)]',
+									talk.line === 'bangkok'
+										? '-left-[(var(--branch-offset)+var(--label-gap))]'
+										: '-left-(--label-gap)',
+									talk.upcoming
+										? 'bg-(--station-color)'
+										: 'bg-white'
+								]}
+								aria-hidden="true"
+							/>
+						</span>
+					</a>
+				</li>
+			))}
+		</ol>
+	</talks-routes>
+</section>
+
+<script>
+	const rect = (selector: Element) => selector.getBoundingClientRect()
+	const qs = (selector: string, element: HTMLElement | Document = document) =>
+		element.querySelector(selector)
+
+	class TalksRoutes extends HTMLElement {
+		observer = new ResizeObserver(() => this.draw())
+
+		connectedCallback() {
+			this.querySelectorAll('.talk-station').forEach((station) =>
+				this.observer.observe(station)
+			)
+			this.draw()
+		}
+
+		disconnectedCallback() {
+			this.observer.disconnect()
+		}
+
+		draw() {
+			const mainStations = [
+				...this.querySelectorAll<HTMLElement>('.line-bangkok')
+			]
+
+			for (let i = 0; i < mainStations.length - 1; i++) {
+				const station = mainStations[i]
+				const next = mainStations[i + 1]
+				const marker = qs('.station-mark', station)
+				const nextMarker = qs('.station-mark', next)
+				const path = qs('.main-route path', station)
+
+				if (!marker || !nextMarker || !path) continue
+
+				const box = rect(station)
+				const start = rect(marker)
+				const end = rect(nextMarker)
+
+				path.setAttribute(
+					'd',
+					`M 0 ${start.top + start.height / 2 - box.top} V ${end.top + end.height / 2 - box.top}`
+				)
+
+				path.classList.toggle(
+					'detour',
+					station.nextElementSibling !== next
+				)
+			}
+
+			for (const branch of this.querySelectorAll<HTMLElement>(
+				'.branch'
+			)) {
+				const previous =
+					branch.previousElementSibling?.querySelector(
+						'.station-mark'
+					)
+
+				const next =
+					branch.nextElementSibling?.querySelector('.station-mark')
+
+				const marker = qs('.station-mark', branch)
+				const path = qs('path', branch)
+
+				if (!previous || !next || !marker || !path) continue
+
+				const box = rect(branch)
+				const start = rect(previous)
+				const end = rect(next)
+				const stop = rect(marker)
+				const x = stop.left + stop.width / 2 - box.left
+				const y1 = start.top + start.height / 2 - box.top
+				const y2 = end.top + end.height / 2 - box.top
+				const r = 8
+
+				path.setAttribute(
+					'd',
+					`M 0 ${y1} L ${x - r} ${y1 + x - r} Q ${x} ${y1 + x} ${x} ${y1 + x + r} V ${y2 - x - r} Q ${x} ${y2 - x} ${x - r} ${y2 - x + r} L 0 ${y2}`
+				)
+			}
+
+			this.classList.add('routes-ready')
+		}
+	}
+
+	if (!customElements.get('talks-routes'))
+		customElements.define('talks-routes', TalksRoutes)
+</script>
+
+<style>
+	@reference '../styles/index.css';
+
+	.main-route :global(.detour) {
+		@apply [stroke-dasharray:5_7] [stroke-opacity:0.55];
+	}
+
+	.routes-ready .branch-route,
+	.routes-ready .main-route {
+		@apply block;
+	}
+
+	.routes-ready .stations::before,
+	.routes-ready .branch::before,
+	.routes-ready .branch::after {
+		@apply hidden;
+	}
+
+	.stations::before {
+		@apply content-[''] absolute inset-y-12 left-[calc(var(--rail-width)/-2)] w-(--rail-width) rounded-full bg-(--rail-bangkok);
+	}
+
+	.branch::before,
+	.branch::after {
+		@apply content-[''] pointer-events-none absolute left-[calc(var(--rail-width)/-2)] w-[calc(var(--branch-offset)+var(--rail-width))] h-[calc(50%+1px)] border-0 border-solid border-(--station-color) border-r-(length:--rail-width);
+	}
+
+	.branch::before {
+		@apply top-0 border-t-(length:--rail-width) rounded-tr-[1.75rem];
+	}
+
+	.branch::after {
+		@apply bottom-0 border-b-(length:--rail-width) rounded-br-[1.75rem];
+	}
+
+	@media (max-width: 767px) {
+		.branch::before {
+			@apply rounded-tr-[1.25rem];
+		}
+		.branch::after {
+			@apply rounded-br-[1.25rem];
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.talk-station a:is(:hover, :focus-visible) .station-mark {
+			animation: station-bounce 0.5s ease-out both;
+		}
+	}
+
+	@keyframes station-bounce {
+		0% {
+			transform: translate(-50%, -50%) scale(1);
+		}
+		35% {
+			transform: translate(-50%, -50%) scale(1.35);
+		}
+		60% {
+			transform: translate(-50%, -50%) scale(0.92);
+		}
+		80% {
+			transform: translate(-50%, -50%) scale(1.15);
+		}
+		100% {
+			transform: translate(-50%, -50%) scale(1.08);
+		}
+	}
+</style>

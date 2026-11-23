@@ -1,0 +1,70 @@
+---
+interface Props {
+	src: string
+	alt: string
+	aspect: string
+	desktopAspect?: string
+	strength?: number
+}
+
+const { src, alt, aspect, desktopAspect = aspect, strength = 1 } = Astro.props
+---
+
+<picture
+	class="parallax-photo"
+	style={`--photo-aspect: ${aspect}; --photo-desktop-aspect: ${desktopAspect}`}
+>
+	<img
+		src={src}
+		alt={alt}
+		loading="lazy"
+		decoding="async"
+		style={`--parallax-strength: ${strength}`}
+	/>
+</picture>
+
+<style>
+	@reference '../styles/index.css';
+
+	.parallax-photo {
+		@apply relative block w-full min-w-0 min-h-0 shrink-0 self-start overflow-clip bg-[#f3f4f6] aspect-(--photo-aspect);
+	}
+
+	img {
+		@apply absolute top-0 left-0 block size-full object-cover object-center;
+	}
+
+	@media (min-width: 768px) {
+		.parallax-photo {
+			@apply aspect-(--photo-desktop-aspect);
+		}
+	}
+
+	@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.parallax-photo {
+				view-timeline-name: --photo;
+				view-timeline-axis: block;
+			}
+
+			img {
+				--travel: calc(
+					clamp(1rem, 3vw, 3rem) * var(--parallax-strength)
+				);
+				@apply top-[calc(-1*var(--travel))] h-[calc(100%_+_2_*_var(--travel))];
+				animation: photo-drift linear both;
+				animation-timeline: --photo;
+				animation-range: cover;
+			}
+		}
+	}
+
+	@keyframes photo-drift {
+		from {
+			transform: translateY(calc(-1 * var(--travel)));
+		}
+		to {
+			transform: translateY(var(--travel));
+		}
+	}
+</style>

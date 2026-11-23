@@ -1,13 +1,19 @@
 ---
 import { ClientRouter } from 'astro:transitions'
+import type { CollectionEntry } from 'astro:content'
+import StructuredData from '../components/structured-data.astro'
+import { blogPosting } from '../lib/structured-data'
 
 import dayjs from 'dayjs'
 import ProgressiveBlur from '../components/progressive-blur.astro'
 import './blog.css'
 
+type Props = CollectionEntry<'blog'>['data']
+
 const { title, description, cover, date, tags } = Astro.props
 
-const slug = Astro.params.slug
+const slug = Astro.params.slug!
+const structuredData = blogPosting(slug, Astro.props)
 ---
 
 <html lang="en">
@@ -15,6 +21,7 @@ const slug = Astro.params.slug
         <title>{title} - SaltyAom</title>
 
         <ClientRouter />
+        <StructuredData data={{ '@context': 'https://schema.org', ...structuredData }} />
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,7 +34,7 @@ const slug = Astro.params.slug
         />
 
         <!-- Open Graph -->
-        <link rel="canonical" href={`https://saltyaom.com/blog/${slug}`}>
+        <link rel="canonical" href={structuredData.url}>
         <meta property="og:title" content={`${title} - SaltyAom`}>
         <meta property="og:description" content={description}>
         <meta property='article:author' content="SaltyAom">
@@ -36,7 +43,7 @@ const slug = Astro.params.slug
         <meta property="og:image:width" content="1920">
         <meta property="og:image:height" content="1200">
         <meta property="og:locale" content="en_US">
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">

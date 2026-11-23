@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content'
 import { ClientRouter } from 'astro:transitions'
+import StructuredData from '../../components/structured-data.astro'
+import { blogPosting, blogUrl, person, website } from '../../lib/structured-data'
 
 import '../../layouts/blog.css'
 import ProgressiveBlur from '../../components/progressive-blur.astro';
@@ -13,6 +15,17 @@ const posts = await getCollection('blog')
     <head>
 	    <title>SaltyAom - Blog</title>
 		<ClientRouter />
+		<StructuredData data={{
+			'@context': 'https://schema.org',
+			'@type': 'Blog',
+			'@id': `${blogUrl}#blog`,
+			url: blogUrl,
+			name: 'SaltyAom Blog',
+			description: 'Collection of blog written by SaltyAom',
+			author: person,
+			isPartOf: website,
+			blogPost: posts.map(({ id, data }) => blogPosting(id, data))
+		}} />
 
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,7 +38,7 @@ const posts = await getCollection('blog')
 	    />
 
 	    <!-- Open Graph -->
-	    <link rel="canonical" href="https://saltyaom.com">
+	    <link rel="canonical" href={blogUrl}>
 	    <meta property="og:title" content="SaltyAom Blog">
 	    <meta property="og:description" content="Collection of blog written by SaltyAom">
 	    <meta property='article:author' content="SaltyAom">

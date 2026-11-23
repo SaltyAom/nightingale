@@ -2,60 +2,80 @@
 import { ClientRouter } from 'astro:transitions'
 import Feature from '../components/feature.astro'
 import Parallax from '../components/parallax.astro'
+import ParallaxPhoto from '../components/parallax-photo.astro'
 import Divider from '../components/divider.astro'
+import TalksMap from '../components/talks-map.astro'
+import StructuredData from '../components/structured-data.astro'
+import { person, siteUrl, website } from '../lib/structured-data'
 
 import '../styles/index.css'
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>SaltyAom</title>
+	<head>
+		<title>SaltyAom</title>
 
-        <ClientRouter />
+		<ClientRouter />
+		<StructuredData
+			data={{
+				'@context': 'https://schema.org',
+				'@type': 'ProfilePage',
+				'@id': `${siteUrl}#profile`,
+				url: siteUrl,
+				name: 'SaltyAom',
+				description: 'SaltyAom, open source maintainer and cosplayer',
+				mainEntity: person,
+				isPartOf: website
+			}}
+		/>
 
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐳</text></svg>"
-        />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐳</text></svg>"
+		/>
 
-        <meta name="title" content="SaltyAom" />
-        <meta
-            name="description"
-            content="SaltyAom, open source maintainer and cosplayer"
-        />
-        <meta name="author" content="SaltyAom" />
-        <link rel="canonical" href="https://saltyaom.com">
+		<meta name="title" content="SaltyAom" />
+		<meta
+			name="description"
+			content="SaltyAom, open source maintainer and cosplayer"
+		/>
+		<meta name="author" content="SaltyAom" />
+		<link rel="canonical" href="https://saltyaom.com" />
 
-        <meta name="og:title" content="SaltyAom" />
-        <meta
-            name="og:description"
-            content="SaltyAom, open source maintainer and cosplayer"
-        />
-        <meta name="og:author" content="SaltyAom" />
-        <meta
-            property="og:image"
-            content="https://saltyaom.com/cosplay/pekomama.webp"
-        />
-        <meta property="og:image:width" content="2340" />
-        <meta property="og:image:height" content="1560" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="website" />
+		<meta name="og:title" content="SaltyAom" />
+		<meta
+			name="og:description"
+			content="SaltyAom, open source maintainer and cosplayer"
+		/>
+		<meta name="og:author" content="SaltyAom" />
+		<meta
+			property="og:image"
+			content="https://saltyaom.com/cosplay/pekomama.webp"
+		/>
+		<meta property="og:image:width" content="2340" />
+		<meta property="og:image:height" content="1560" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content="website" />
 
-        <link rel="preload" href="/cosplay/pekomama-fg.webp" as="image" />
-        <link rel="preload" href="/cosplay/pekomama-bg.webp" as="image" />
+		<link rel="preload" href="/cosplay/pekomama-fg.webp" as="image" />
+		<link rel="preload" href="/cosplay/pekomama-bg.webp" as="image" />
 
-        <meta name="robots" content="index, follow" />
-    </head>
-    <body>
-    	<Parallax class="hidden lg:block">
-     		<header class="relative flex flex-col justify-center h-full font-medium text-white left-12 xl:left-20 pt-40 transition-all">
-       			<h1 class="text-9xl text-white font-serif font-medium peko-opacity">SaltyAom</h1>
-       			<h2 class="mt-2 text-2xl font-serif peko-opacity">Code, and Cosplay</h2>
-	 	        <section class="grid grid-cols-3 max-w-2xl gap-4 mt-6">
+		<meta name="robots" content="index, follow" />
+	</head>
+	<body>
+		<Parallax class="hidden lg:block">
+			<header class="relative flex flex-col justify-center h-full font-medium text-white left-12 xl:left-20 pt-40 transition-all">
+				<h1 class="text-9xl text-white font-serif font-medium peko-opacity">
+					SaltyAom
+				</h1>
+				<h2 class="mt-2 text-2xl font-serif peko-opacity">
+					Code, and Cosplay
+				</h2>
+				<section class="grid grid-cols-3 max-w-2xl gap-4 mt-6">
 					<Feature
 						title="Elysia"
 						content="An ergonomic framework for humans"
@@ -79,217 +99,321 @@ import '../styles/index.css'
 					/>
 				</section>
 				<aside class="flex gap-1 items-center mt-4 peko-opacity">
-					<a class="social-link" href="https://x.com/saltyaom" target="_blank">
+					<a
+						class="social-link"
+						href="https://x.com/saltyaom"
+						target="_blank"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24px"
-				 			height="24px"
-					  		viewBox="0 0 24 24"
-					       	xml:space="preserve"
+							height="24px"
+							viewBox="0 0 24 24"
+							xml:space="preserve"
 							stroke="currentColor"
 							fill="currentColor"
 							style="transform: scale(.9)"
-					    >
-							<path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/>
+						>
+							<path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z" />
 						</svg>
 					</a>
 
-					<a class="social-link" href="https://bsky.app/profile/saltyaom.com" target="_blank">
-						<svg xmlns="http://www.w3.org/2000/svg" width="600" height="24" version="1.1">
-							<path style="transform: scale(.0425)" d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z" fill="currentColor" />
+					<a
+						class="social-link"
+						href="https://bsky.app/profile/saltyaom.com"
+						target="_blank"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="600"
+							height="24"
+							version="1.1"
+						>
+							<path
+								style="transform: scale(.0425)"
+								d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z"
+								fill="currentColor"
+							/>
 						</svg>
 					</a>
 
-					<a class="social-link" href="http://github.com/saltyaom" target="_blank">
-						<svg width="98" height="96" xmlns="http://www.w3.org/2000/svg" style="transform: scale(.85) translateY(-1px) translateX(-3px)" viewBox="0 0 97.707 96">
-							<path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="currentColor" />
+					<a
+						class="social-link"
+						href="http://github.com/saltyaom"
+						target="_blank"
+					>
+						<svg
+							width="98"
+							height="96"
+							xmlns="http://www.w3.org/2000/svg"
+							style="transform: scale(.85) translateY(-1px) translateX(-3px)"
+							viewBox="0 0 97.707 96"
+						>
+							<path
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
+								fill="currentColor"
+							/>
 						</svg>
 					</a>
 
-					<a class="social-link" href="mailto:saltyaom@gmail.com" target="_blank">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: translateX(-4px)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+					<a
+						class="social-link"
+						href="mailto:saltyaom@gmail.com"
+						target="_blank"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							style="transform: translateX(-4px)"
+						>
+							<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+							<polyline points="22,6 12,13 2,6"></polyline>
+						</svg>
 					</a>
-           		</aside>
+				</aside>
 
-             	<a
-              		href="/blog"
-                	class="absolute text-sm flex items-center bottom-16 font-light pl-2 py-0.5 rounded-xl backdrop-blur-2xl border border-white/25 peko-opacity outline-offset-4 outline-white hocus:border-white/50 hocus:scale-110 transition-all duration-700"
-                 	style="transition-timing-function: var(--ease-out-expo);"
-                 >
-              		Blog
-                	<svg xmlns="http://www.w3.org/2000/svg" class="scale-75" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              	</a>
-      		</header>
-        </Parallax>
+				<a
+					href="/blog"
+					class="absolute text-sm flex items-center bottom-16 font-light pl-2 py-0.5 rounded-xl backdrop-blur-2xl border border-white/25 peko-opacity outline-offset-4 outline-white hocus:border-white/50 hocus:scale-110 transition-all duration-700"
+					style="transition-timing-function: var(--ease-out-expo);"
+				>
+					Blog
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="scale-75"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<polyline points="9 18 15 12 9 6"></polyline>
+					</svg>
+				</a>
+			</header>
+		</Parallax>
 
-        <div class="flex justify-end lg:hidden max-w-3xl mx-auto mt-2 px-2">
-      		<a href="/blog" class="text-sm font-medium text-blue-500 bg-blue-500/10 px-3 py-1.5 rounded-full hover:scale-110 focus:scale-110 active:scale-98 active:duration-150 transition-transform ease-out duration-200">Blog</a>
-        </div>
+		<div class="flex justify-end lg:hidden max-w-3xl mx-auto mt-2 px-2">
+			<a
+				href="/blog"
+				class="text-sm font-medium text-blue-500 bg-blue-500/10 px-3 py-1.5 rounded-full hover:scale-110 focus:scale-110 active:scale-98 active:duration-150 transition-transform ease-out duration-200"
+			>
+				Blog
+			</a>
+		</div>
 
-        <main
-            class="flex flex-col w-full max-w-3xl px-4 mx-auto pt-24 lg:pt-12 pb-12 text-lg text-gray-700 dark:text-300 leading-8"
-        >
+		<main class="flex flex-col w-full max-w-3xl px-4 mx-auto pt-24 lg:pt-12 pb-12 text-lg text-gray-700 dark:text-300 leading-8">
+			<!-- <Divider class="lg:flex hidden mb-8" /> -->
 
-        	<Divider class="lg:flex hidden mb-8" />
+			<h1 class="text-5xl text-black md:mt-8 mb-4 font-serif">
+				SaltyAom here
+			</h1>
+			<p class="lg:mb-8">I code and cosplay.</p>
+			<p>
+				Made
+				<a
+					class="link-pink"
+					target="_blank"
+					href="https://elysiajs.com"
+					title="An ergonomic framework for humans"
+				>
+					Elysia
+				</a>
+				,
+				<a
+					class="link-amber"
+					target="_blank"
+					href="https://niku.saltyaom.com"
+					title="Niku is a UI library for Flutter"
+				>
+					Niku
+				</a>
+				,
+				<a
+					class="link-emerald"
+					target="_blank"
+					href="https://github.com/saltyaom/mobius"
+					title="Infer type from GraphQL schema in TypeScript"
+				>
+					Mobius GraphQL
+				</a>
+				, and cosplay various characters.
+			</p>
 
-            <h1 class="text-5xl text-black mb-4 font-serif">SaltyAom</h1>
-            <p class="lg:mb-8">I code and cosplay.</p>
-            <p>
-                Made
-                <a
-                	class="link-pink"
-                 	target="_blank"
-                  	href="https://elysiajs.com"
-                   	title="An ergonomic framework for humans"
-                >Elysia</a>,
-                <a
-                    class="link-amber"
-                    target="_blank"
-                    href="https://niku.saltyaom.com"
-                    title="Niku is a UI library for Flutter"
-                >
-                    Niku
-                </a>,
-                <a
-                    class="link-emerald"
-                    target="_blank"
-                    href="https://github.com/saltyaom/mobius"
-                    title="Infer type from GraphQL schema in TypeScript"
-                >
-                    Mobius GraphQL
-                </a>, and cosplay various characters.
-            </p>
+			<p>
+				Help <s class="text-gray-400 font-light">organize events</s> do
+				random stuffs with
+				<a
+					class="link-blue"
+					target="_blank"
+					href="https://creatorsgarten.org"
+					title="Creatorsgarten"
+				>
+					Creatorsgarten
+				</a>
+				.
+			</p>
 
-            <picture
-                class="lg:hidden block bg-gray-100 my-4 rounded-xl aspect-3-2 overflow-hidden image-scale object-shadow"
-            >
-                <img
-                    class="w-full aspect-3-2 object-cover object-center"
-                    src="/cosplay/pekomama.webp"
-                    alt="SaltyAom's pekomama cosplay smiling at the camera"
-                />
-            </picture>
-
-            <p>
-                I make things to make my life easier.
-            </p>
-            <p>
-                Good at abusing type-level TypeScript to do things that it shouldn't do.
-            </p>
-
-            <br />
-
-            <p>
-                I want to be full-time open source maintainer, currently on
-                <a
-                    class="link-green"
-                    target="_blank"
-                    href="https://github.com/sponsors/saltyaom"
-                    title="Help me pay my bill with GitHub Sponsors"
-                    >GitHub Sponsors</a
-                >
-                , but still do freelance to pay the bill.
-            </p>
-
-            <br />
-
-            <p>
-                Beside programming, I love to cosplay, play games, watch anime,
-                and draw sometime like Blue Archive, Arknights, Honkai Impact
-                3rd, Honkai Star Rail, MaiMai.
-            </p>
-
-            <br />
-
-            <p>
-                See me on <a class="link-violet" href="https://github.com/saltyaom" title="See my work on GitHub">
-                    GitHub
-                </a> or <a class="link-blue" href="https://twitter.com/saltyaom" title="I'm active on Twitter/x">
-                    Twitter/x
-                </a> or <a class="link-pink" href="/blog" title="Check out my blog!">
-                    My Blog
-                </a>
-            </p>
-
- 			<Divider class="mt-12" />
-        </main>
-
-        <footer class="flex flex-col-reverse sm:flex-row-reverse w-full">
-            <div class="flex flex-col-reverse sm:flex-col sm:w-[36%]">
-            	<div class="aspect-16-10 bg-gray-100 overflow-hidden"
-                    style="aspect-ratio:9/14"
-                >
-                    <img
-                        loading="lazy"
-                        class="w-full object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-                        src="/cosplay/ryousan.webp"
-                        alt="SaltyAom's casual in Ryousangata form"
-                        style="aspect-ratio:9/14"
-                    />
-                </div>
-                <div class="bg-gray-100 overflow-hidden">
-                    <img
-                        loading="lazy"
-                        class="w-full object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-                        src="/cosplay/nightingale-close.webp"
-                        alt="SaltyAom's Nightingale cosplay holding a magical wand while looking up to the sky"
-                    />
-                </div>
-            </div>
-
-            <div class="flex flex-col sm:w-[64%]">
-            <div class="aspect-16-10 bg-gray-100 overflow-hidden">
-                    <img
-                        loading="lazy"
-                        class="w-full aspect-16-10 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-                        src="/cosplay/tingyun-cover.webp"
-                        alt="SaltyAom's Tingyun cosplay holding both hands resting on the chest"
-                    />
-            </div>
-
-            <div class="aspect-16-10 bg-gray-100 overflow-hidden">
-                    <img
-                        loading="lazy"
-                        class="w-full aspect-16-10 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-                        src="/cosplay/haruna-pose.webp"
-                        alt="SaltyAom's Haruna cosplay smiling at the camera"
-                    />
-                </div>
-            </div>
-        </footer>
-
-        <section class="relative flex flex-col md:flex-row max-w-8xl w-full mx-auto">
-        	<picture class="bg-gray-100 aspect-4-3 overflow-hidden ">
-	         	<img
-					class="w-full h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-					src="/cosplay/case-3.webp"
-					alt="SaltyAom sitting near a cannon"
-					loading="lazy"
+			<picture class="lg:hidden block bg-gray-100 my-4 rounded-xl aspect-3-2 overflow-hidden image-scale object-shadow">
+				<img
+					class="w-full aspect-3-2 object-cover object-center"
+					src="/cosplay/pekomama.webp"
+					alt="SaltyAom's pekomama cosplay smiling at the camera"
 				/>
-         	</picture>
-         	<picture class="bg-gray-100 aspect-4-3 overflow-hidden">
-	         	<img
-					class="w-full h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-					src="/cosplay/case-2.webp"
-					alt="SaltyAom holding a pink pien cat plushie (p-chan)"
-					loading="lazy"
-				/>
-          	</picture>
-          	<picture class="bg-gray-100 aspect-4-3 overflow-hidden">
-	         	<img
-					class="w-full h-full aspect-4-3 object-cover object-center hover:scale-105 transition-transform ease-out duration-300"
-					src="/cosplay/case-1.webp"
-					alt="SaltyAom in a white ryousangata hoodie"
-				/>
-           	</picture>
-        </section>
+			</picture>
 
-        <p class="w-full mt-8 text-center text-gray-400 text-sm font-serif">
-        	For all that is beautiful in the world
-        </p>
+			<br />
 
-        <p class="w-full mt-2 mb-8 text-center text-gray-400 text-sm font-serif">
-            &copy; SaltyAom
-        </p>
-    </body>
+			<p>Was a design engineer at Brikl.</p>
+			<p>
+				Now do full-time open source maintainer via
+				<a
+					class="link-green"
+					target="_blank"
+					href="https://github.com/sponsors/saltyaom"
+					title="Help me pay my bill with GitHub Sponsors"
+				>
+					GitHub Sponsors
+				</a>
+				.
+			</p>
+
+			<br />
+
+			<p>Good at absuing TypeScript types, DX and SDK design</p>
+
+			<br />
+
+			<p>
+				Beside programming, I love to cosplay, play games, watch anime,
+				and draw sometime like Blue Archive, Arknights, Honkai Impact
+				3rd, Honkai Star Rail, MaiMai.
+			</p>
+
+			<br />
+
+			<p>
+				See me on{' '}
+				<a
+					class="link-violet"
+					href="https://github.com/saltyaom"
+					target="_blank"
+					title="See my work on GitHub"
+				>
+					GitHub
+				</a>{' '}
+				,{' '}
+				<a
+					class="link-blue"
+					href="https://twitter.com/saltyaom"
+					target="_blank"
+					title="I'm active on Twitter/x"
+				>
+					Twitter/x
+				</a>
+				,{' '}
+				<a
+					class="link-green"
+					href="https://www.pixiv.net/users/25025269"
+					target="_blank"
+					title="I draw on Pixiv"
+				>
+					Pixiv
+				</a>{' '}
+				or write random stuffs on{' '}
+				<a class="link-pink" href="/blog" title="Check out my blog!">
+					My Blog
+				</a>
+				.
+			</p>
+
+			<br />
+
+			<p>I'm familiar with these tools:</p>
+			<img
+				src="https://skillicons.dev/icons?i=bun,typescript,dart,flutter,rust,go,elysia,actix,react,nextjs,vue,nuxt,svelte,astro,graphql"
+				alt="bun,typescript,dart,flutter,rust,go,elysia,actix,react,nextjs,vue,nuxt,svelte,astro,graphql"
+				style="aspect-ratio: 368/21"
+			/>
+
+			<TalksMap />
+
+			<!-- <Divider class="mt-12" /> -->
+		</main>
+
+		<footer class="flex flex-col-reverse sm:flex-row-reverse w-full">
+			<div class="flex flex-col-reverse sm:flex-col sm:w-[36%]">
+				<ParallaxPhoto
+					src="/cosplay/ryousan.webp"
+					strength={1.2}
+					alt="SaltyAom's casual in Ryousangata form"
+					aspect="9 / 14"
+				/>
+				<ParallaxPhoto
+					src="/cosplay/nightingale-close.webp"
+					strength={1}
+					alt="SaltyAom's Nightingale cosplay holding a magical wand while looking up to the sky"
+					aspect="3 / 2"
+				/>
+			</div>
+			<div class="flex flex-col sm:w-[64%]">
+				<ParallaxPhoto
+					src="/cosplay/tingyun-cover.webp"
+					strength={1.6}
+					alt="SaltyAom's Tingyun cosplay holding both hands resting on the chest"
+					aspect="16 / 10"
+				/>
+				<ParallaxPhoto
+					src="/cosplay/haruna-pose.webp"
+					strength={1.4}
+					alt="SaltyAom's Haruna cosplay smiling at the camera"
+					aspect="16 / 10"
+				/>
+			</div>
+		</footer>
+
+		<section class="relative grid grid-cols-1 md:grid-cols-[832fr_923fr_972fr] max-w-8xl w-full mx-auto">
+			<ParallaxPhoto
+				src="/cosplay/case-3.webp"
+				strength={1.4}
+				alt="SaltyAom sitting near a cannon"
+				aspect="832 / 1110"
+				desktopAspect="832 / 1295"
+			/>
+			<ParallaxPhoto
+				src="/cosplay/case-2.webp"
+				strength={1}
+				alt="SaltyAom in Liz Lisa Afternoon Tea dress"
+				aspect="923 / 1230"
+				desktopAspect="923 / 1295"
+			/>
+			<ParallaxPhoto
+				src="/cosplay/case-1.webp"
+				strength={1.6}
+				alt="SaltyAom in a white ryousangata hoodie"
+				aspect="972 / 1295"
+				desktopAspect="972 / 1295"
+			/>
+		</section>
+
+		<p class="w-full mt-8 text-center text-gray-400 text-sm font-serif">
+			For all that is beautiful in the world
+		</p>
+
+		<p class="w-full mt-2 mb-8 text-center text-gray-400 text-sm font-serif">
+			&copy; SaltyAom
+		</p>
+	</body>
 </html>
