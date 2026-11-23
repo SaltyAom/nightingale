@@ -54,7 +54,7 @@ const { src, alt, aspect, desktopAspect = aspect, strength = 1 } = Astro.props
 				@apply top-[calc(-1*var(--travel))] h-[calc(100%_+_2_*_var(--travel))];
 				animation: photo-drift linear both;
 				animation-timeline: --photo;
-				animation-range: cover;
+				animation-range: entry 0% exit 0%;
 			}
 		}
 	}

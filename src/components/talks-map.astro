@@ -1,4 +1,29 @@
 ---
+import { undefined } from 'astro:schema'
+
+type Month =
+	| 'Jan'
+	| 'Feb'
+	| 'Mar'
+	| 'Apr'
+	| 'May'
+	| 'Jun'
+	| 'Jul'
+	| 'Aug'
+	| 'Sep'
+	| 'Oct'
+	| 'Nov'
+	| 'Dec'
+
+interface Talk {
+	event: string
+	title: string
+	date: `${Month} ${number}`
+	href: string
+	line: 'bangkok' | 'online' | 'overseas'
+	upcoming?: boolean
+}
+
 const talks = [
 	{
 		event: 'BKK.JS #14',
@@ -93,20 +118,27 @@ const talks = [
 	},
 	{
 		event: 'Vue Fes Japan 2026',
-		title: 'Future of Server-Side Frameworks',
+		title: 'Future ofs Server-Side Frameworks',
 		date: 'Oct 2026',
 		href: 'https://vuefes.jp/2026/en/event',
 		line: 'overseas'
+	},
+	{
+		event: 'AI Developer Meetup',
+		title: 'How to maintain Open Source Software in the age of AI*',
+		date: 'Nov 2026',
+		href: 'https://www.eventpop.me/e/182351/ai-developer-meetup-2026',
+		line: 'bangkok'
 	},
 	{
 		event: 'MEGA AI Skills Fest 2026',
 		title: 'Upcoming appearance',
 		date: 'Nov 2026',
 		href: 'https://www.bitec.co.th/news/event/mega-ai-skills-fest',
-		line: 'bangkok',
-		upcoming: true
+		line: 'bangkok'
 	}
-]
+] as const satisfies Talk[]
+
 const lineColors: Record<string, string> = {
 	bangkok: '[--station-color:var(--rail-bangkok)]',
 	online: '[--station-color:var(--rail-online)]',
@@ -135,6 +167,7 @@ const routes = [
 			A route through conference talks, meetups, and panels.
 		</p>
 	</header>
+
 	<ul
 		class="route-legend mt-6 mb-10 flex list-none flex-wrap gap-x-6 gap-y-3 p-0 text-xs leading-[inherit] font-semibold text-[#596170]"
 		aria-label="Talk locations"
@@ -152,6 +185,7 @@ const routes = [
 			</li>
 		))}
 	</ul>
+
 	<talks-routes class="block">
 		<ol class="stations relative m-0 ml-2.5 list-none p-0">
 			{talks.map((talk) => (
@@ -216,7 +250,7 @@ const routes = [
 									talk.line === 'bangkok'
 										? '-left-[(var(--branch-offset)+var(--label-gap))]'
 										: '-left-(--label-gap)',
-									talk.upcoming
+									'upcoming' in talk && talk.upcoming
 										? 'bg-(--station-color)'
 										: 'bg-white'
 								]}
@@ -236,12 +270,13 @@ const routes = [
 		element.querySelector(selector)
 
 	class TalksRoutes extends HTMLElement {
-		observer = new ResizeObserver(() => this.draw())
+		observer = new ResizeObserver(this.draw)
 
 		connectedCallback() {
 			this.querySelectorAll('.talk-station').forEach((station) =>
 				this.observer.observe(station)
 			)
+
 			this.draw()
 		}
 
