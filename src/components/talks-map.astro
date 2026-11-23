@@ -196,7 +196,7 @@ const routes = [
 						`line-${talk.line}`,
 						{
 							branch: talk.line !== 'bangkok',
-							upcoming: talk.upcoming
+							upcoming: 'upcoming' in talk && talk.upcoming
 						}
 					]}
 				>
