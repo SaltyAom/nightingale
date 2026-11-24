@@ -270,7 +270,7 @@ const routes = [
 		element.querySelector(selector)
 
 	class TalksRoutes extends HTMLElement {
-		observer = new ResizeObserver(this.draw)
+		observer = new ResizeObserver(this.draw.bind(this))
 
 		connectedCallback() {
 			this.querySelectorAll('.talk-station').forEach((station) =>
